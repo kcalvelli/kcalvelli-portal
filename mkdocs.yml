@@ -1,0 +1,25 @@
+site_name: Engineering Portal
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+  features:
+    - navigation.tabs
+    - content.code.copy
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+nav:
+  - Dashboard: index.md
+  - Core System:
+      - Axios Library: axios.md
+  - Ecosystem & Tools:
+      - Axios Monitor: axios-monitor.md
+      - Brave Previews: brave-browser-previews.md
+      - C64 Stream Viewer: c64-stream-viewer.md
+      - Ultimate64 MCP: Ultimate64MCP.md
+      - MCP Journal: mcp-journal.md
