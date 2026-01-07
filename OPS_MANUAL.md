@@ -23,7 +23,7 @@ For each repo in the list:
    - Get the Repository Description.
    - Read the `README.md`.
    - Read `CONTRIBUTING.md` (if it exists) for onboarding info.
-   - Run `gh release view --json tagName,publishedAt,body` to get the latest release.
+   - **Releases:** Run `gh release list --limit 20 --json tagName,publishedAt,isLatest --order desc` to fetch the release history.
    
 2. **Analyze for Architecture (Synthesis):**
    - List the files in the root and `src` to identify the stack (e.g., Nix flakes, Rust/Cargo, Python, Docker).
@@ -36,7 +36,9 @@ For each repo in the list:
    - **Section 1: Overview:** Summary and link to the repo.
    - **Section 2: Architecture:** Insert the synthesized Mermaid diagram inside a ````mermaid` code block. Explain your architectural assumptions.
    - **Section 3: Onboarding:** Summary of how to build/run (prioritize `nix build` or `nix develop` instructions if found).
-   - **Section 4: Latest Status:** Release version and notes.
+   - **Section 4: Release History:** - Create a Markdown table with columns: **Version**, **Date**, **Status**.
+     - Mark the row where `isLatest` is true with a "✅" or "Latest" badge.
+     - Format the date as YYYY-MM-DD.
 
 ### 3. Finalization
 1. Update `mkdocs.yml` to include the new pages in the `nav` section. **Enforce this exact hierarchy:**
