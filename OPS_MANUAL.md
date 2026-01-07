@@ -28,8 +28,9 @@ For each repo in the list:
 2. **Analyze for Architecture (Synthesis):**
    - List the files in the root and `src` to identify the stack (e.g., Nix flakes, Rust/Cargo, Python, Docker).
    - **Diagram Logic:**
-     - For `kcalvelli/axios`: Synthesize a high-level **System Context** diagram showing how it integrates with NixOS and user configs.
-     - For others: Synthesize **Container** or **Component** diagrams showing how they might consume `axios` or interact with the user.
+     - **Constraint:** Do NOT depict internal implementation details such as specific threads, internal classes, individual script files, or functions. Focus on high-level logical blocks and external system interactions.
+     - For `kcalvelli/axios`: STRICTLY synthesize a **C4Context** diagram. Focus on the relationship between the User, the Framework, and external systems (NixOS, Home Manager).
+     - For others: STRICTLY synthesize **C4Component** diagrams. Show the tool as a single logical block (or 2-3 high-level components) and its relationship to the User, `axios`, and external hardware/APIs.
    - Check `flake.nix` or `default.nix` specifically to identify dependencies.
 
 3. **Write Output (`docs/<repo-name>.md`):**
