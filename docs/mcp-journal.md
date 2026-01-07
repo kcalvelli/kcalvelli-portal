@@ -10,27 +10,18 @@ A Model Context Protocol (MCP) server that allows AI assistants to query system 
 
 ## Architecture
 
-The server securely wraps the `journalctl` command-line tool, exposing a structured query interface to the MCP client.
+The server wraps `journalctl` commands to expose logs to the MCP client.
 
 ```mermaid
-C4Container
-    title Container Diagram for MCP Journal
+C4Component
+    title Component Diagram for MCP Journal
 
-    System_Ext(ai, "AI Assistant", "Claude / Cursor")
-    
-    Container_Boundary(app, "MCP Application") {
-        Component(server, "MCP Server", "Python", "Stdio Transport for JSON-RPC")
-        Component(tools, "Tool Logic", "Python", "Implements logs.query, logs.tail")
-        Component(security, "Security Layer", "Python", "Validates args & Enforces Allowlist")
-    }
+    System_Ext(ai, "AI Assistant", "Claude/Cursor")
+    Component(mcp, "MCP Server", "Python", "Queries journalctl")
+    System_Ext(journald, "systemd-journald", "System Service", "Log storage")
 
-    System_Ext(systemd, "systemd", "OS Service", "journalctl / systemctl")
-
-    Rel(ai, server, "Queries logs via MCP")
-    Rel(server, tools, "Dispatches request")
-    Rel(tools, security, "Checks constraints")
-    Rel(security, systemd, "Executes subprocess (journalctl)")
-    Rel(systemd, tools, "Returns JSON logs")
+    Rel(ai, mcp, "Queries logs via MCP", "Stdio")
+    Rel(mcp, journald, "Reads logs", "journalctl")
 ```
 
 ## Onboarding

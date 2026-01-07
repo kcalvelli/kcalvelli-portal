@@ -10,28 +10,18 @@ This repository provides an automated way to get the latest **Brave Nightly** an
 
 ## Architecture
 
-This project relies on GitHub Actions to automate the fetching of upstream binaries and updating of the Nix flake.
+This project functions as a bridge between Brave's binary releases and the Nix ecosystem.
 
 ```mermaid
-C4Container
-    title Container Diagram for Brave Browser Previews
+C4Component
+    title Component Diagram for Brave Browser Previews
 
-    System_Ext(github_actions, "GitHub Actions", "CI/CD", "Runs daily cron")
-    
-    Container_Boundary(repo, "Repository Context") {
-        Component(script, "update.sh", "Bash Script", "Queries API & Prefetches binaries")
-        Component(flake, "flake.nix", "Nix Flake", "Exports packages & modules")
-        Component(json, "Version Data", "Nix Files", "Contains versions & SRI hashes")
-    }
-
-    System_Ext(brave_api, "Brave Releases", "GitHub API", "Source of upstream binaries")
     Person(user, "User", "NixOS User")
+    Component(flake, "Flake", "Nix Flake", "Provides Brave packages and modules")
+    System_Ext(brave_releases, "Brave Releases", "GitHub Releases", "Source of binaries")
 
-    Rel(github_actions, script, "Executes")
-    Rel(script, brave_api, "Queries latest Nightly/Beta")
-    Rel(script, json, "Updates hashes in")
-    Rel(flake, json, "Reads versions from")
     Rel(user, flake, "Imports as input or runs via nix run")
+    Rel(flake, brave_releases, "Fetches nightly/beta binaries daily")
 ```
 
 ## Onboarding

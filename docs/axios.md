@@ -15,33 +15,22 @@ Key features include:
 
 ## Architecture
 
-axiOS functions as a library that composes various inputs into a cohesive system configuration.
+axiOS integrates with NixOS and Home Manager to provide a cohesive system configuration.
 
 ```mermaid
-C4Container
-    title Container Diagram for axiOS System
+C4Context
+    title System Context Diagram for axiOS
 
     Person(user, "User", "NixOS User")
-    
-    Container_Boundary(axios, "axiOS Framework") {
-        Component(lib, "lib.mkSystem", "Nix Function", "Entry point for system creation")
-        Component(desktop, "Desktop Module", "Nix Module", "Niri, DMS, Theming, Wallpapers")
-        Component(dev, "Dev Module", "Nix Module", "Langs, Shells, Tools")
-        Component(infra, "Infra Module", "Nix Module", "Disko, Boot, Virt")
-    }
-
+    System(axios, "axiOS", "NixOS Framework & Library")
     System_Ext(nixpkgs, "Nixpkgs", "Nix Package Repository")
     System_Ext(hm, "Home Manager", "User Environment Manager")
-    System_Ext(inputs, "Flake Inputs", "Niri, DankMaterialShell, Lanzaboote, etc.")
+    System_Ext(nixos, "NixOS", "Operating System")
 
-    Rel(user, lib, "Defines config via flake.nix")
-    Rel(lib, desktop, "Imports")
-    Rel(lib, dev, "Imports")
-    Rel(lib, infra, "Imports")
-    
-    Rel(desktop, inputs, "Uses Niri/DMS from")
-    Rel(desktop, hm, "Configures user via")
-    Rel(lib, nixpkgs, "Builds system from")
+    Rel(user, axios, "Configures via flake.nix", "Nix")
+    Rel(axios, nixpkgs, "Consumes packages from")
+    Rel(axios, hm, "Configures user environment via")
+    Rel(axios, nixos, "Builds system configuration for")
 ```
 
 The system is designed as a library (`axios.lib.mkSystem`) rather than a monolithic config, allowing for high modularity and customization.

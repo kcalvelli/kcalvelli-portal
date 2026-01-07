@@ -10,25 +10,18 @@ A **Model Context Protocol (MCP)** server that enables AI assistants like Claude
 
 ## Architecture
 
-The server translates MCP protocol requests into REST API calls understood by the Ultimate 64 hardware.
+The server acts as a bridge between the MCP protocol and the Ultimate 64's REST API.
 
 ```mermaid
-C4Container
-    title Container Diagram for Ultimate64 MCP
+C4Component
+    title Component Diagram for Ultimate64 MCP
 
-    System_Ext(ai, "AI Assistant", "Claude / Cursor / IDE")
-    System_Ext(u64, "Ultimate 64", "Hardware", "Exposes REST API Endpoint")
+    System_Ext(ai, "AI Assistant", "Claude/Cursor")
+    Component(mcp, "MCP Server", "Python", "Translates MCP tools to REST calls")
+    System_Ext(u64, "Ultimate 64", "Hardware", "Exposes REST API")
 
-    Container_Boundary(server, "MCP Server (Docker/Python)") {
-        Component(transport, "Transport Layer", "Stdio / SSE", "Handles JSON-RPC messages")
-        Component(router, "Tool Router", "Python", "Maps tool names (e.g., ultimate_load_disk) to functions")
-        Component(api_client, "API Client", "Python requests", "Translates to U64 REST calls")
-    }
-
-    Rel(ai, transport, "Sends Tools Calls (JSON-RPC)")
-    Rel(transport, router, "Parses Request")
-    Rel(router, api_client, "Invokes Logic")
-    Rel(api_client, u64, "HTTP GET/POST /v1/...")
+    Rel(ai, mcp, "Controls via MCP", "Stdio/SSE")
+    Rel(mcp, u64, "Controls via API", "REST/HTTP")
 ```
 
 ## Onboarding
