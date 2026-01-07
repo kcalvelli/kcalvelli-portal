@@ -1,39 +1,48 @@
 # Ultimate64 MCP
 
-**Repo:** [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP)
+**MCP server for the Ultimate 64 series mainboards and cartridges.**
 
-A Model Context Protocol (MCP) server that exposes the Ultimate64's API to LLMs (like Claude). This allows AI agents to control the C64 hardware, load cartridges, or type text.
+[View on GitHub](https://github.com/kcalvelli/Ultimate64MCP)
+
+## Overview
+
+A **Model Context Protocol (MCP)** server that enables AI assistants like Claude to control the Commodore 64 Ultimate hardware. It allows loading programs, managing disks, reading memory, and controlling the device via natural language.
 
 ## Architecture
 
+The server acts as a bridge between the MCP protocol and the Ultimate 64's REST API.
+
 ```mermaid
-graph LR
-    subgraph AI Client
-        Claude[Claude / Cursor]
-    end
+C4Component
+    title Component Diagram for Ultimate64 MCP
 
-    subgraph Middleware
-        MCP[Ultimate64MCP Server]
-    end
+    System_Ext(ai, "AI Assistant", "Claude/Cursor")
+    Component(mcp, "MCP Server", "Python", "Translates MCP tools to REST calls")
+    System_Ext(u64, "Ultimate 64", "Hardware", "Exposes REST API")
 
-    subgraph Hardware
-        U64[Ultimate64 Device]
-    end
-
-    Claude <-->|MCP Protocol| MCP
-    MCP <-->|REST API| U64
+    Rel(ai, mcp, "Controls via MCP", "Stdio/SSE")
+    Rel(mcp, u64, "Controls via API", "REST/HTTP")
 ```
 
 ## Onboarding
 
-Run the server:
+You can run the server via Python or Docker.
 
+**Python:**
 ```bash
-nix run github:kcalvelli/Ultimate64MCP
+git clone https://github.com/kcalvelli/Ultimate64MCP.git
+cd Ultimate64MCP/mcp_hosted
+pip install -r requirements.txt
+python mcp_ultimate_server.py
 ```
 
-Configure your MCP client (e.g., in `claude_desktop_config.json`) to point to this executable.
+**Docker:**
+```bash
+docker run -p 8000:8000 -e C64_HOST=192.168.1.64 ultimate64-mcp
+```
 
-## Latest Status
+## Release History
 
-**Release:** *Rolling*
+| Version | Date | Status |
+| :--- | :--- | :--- |
+| - | - | No releases found |

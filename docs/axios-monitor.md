@@ -1,42 +1,42 @@
-# Axios Monitor
+# axiOS Monitor
 
-**Repo:** [kcalvelli/axios-monitor](https://github.com/kcalvelli/axios-monitor)
+**A DMS plugin for monitoring and managing axiOS systems.**
 
-A DankMaterialShell (DMS) plugin for monitoring and managing NixOS systems. It provides visual feedback and control integration directly into the shell environment.
+[View on GitHub](https://github.com/kcalvelli/axios-monitor)
+
+## Overview
+
+A plugin for [DankMaterialShell](https://danklinux.com/) specifically designed for axiOS. It allows users to monitor system generations, check for updates, and trigger system rebuilds directly from the desktop UI.
 
 ## Architecture
 
-This component diagram shows how `axios-monitor` integrates with the shell and system.
+The plugin integrates into the desktop shell and communicates with the underlying NixOS system.
 
 ```mermaid
-graph TD
-    subgraph System
-        OS[NixOS System]
-        JS[journalctl]
-        NS[Nix Store]
-    end
+C4Component
+    title Component Diagram for axiOS Monitor
 
-    subgraph User Interface
-        DMS[DankMaterialShell]
-        AM[axios-monitor Plugin]
-    end
+    Person(user, "User", "NixOS User")
+    Component(plugin, "axiOS Monitor", "DankMaterialShell Plugin", "UI for system updates")
+    System_Ext(nixos, "NixOS System", "OS", "Handles rebuilds")
+    System_Ext(github, "GitHub", "Remote", "Checks for updates")
 
-    AM -->|Extends| DMS
-    AM -->|Reads| OS
-    AM -->|Queries| JS
-    AM -->|Monitors| NS
+    Rel(user, plugin, "Interacts with")
+    Rel(plugin, nixos, "Triggers rebuilds")
+    Rel(plugin, github, "Checks version")
 ```
 
 ## Onboarding
 
-To use this plugin, you typically include it in your DMS configuration.
+If you are using axiOS with the desktop module enabled, this plugin is **automatically configured**.
 
-**Flake Input:**
+For manual installation (on axiOS), add to your home-manager config:
 ```nix
-inputs.axios-monitor.url = "github:kcalvelli/axios-monitor";
+programs.axios-monitor.enable = true;
 ```
 
-## Latest Status
+## Release History
 
-**Release:** *No official release yet (Rolling)*
-**Source:** Main branch
+| Version | Date | Status |
+| :--- | :--- | :--- |
+| - | - | No releases found |

@@ -1,53 +1,41 @@
 # C64 Stream Viewer
 
-**Repo:** [kcalvelli/c64-stream-viewer](https://github.com/kcalvelli/c64-stream-viewer)
+**Wayland-native viewer for Ultimate64 video/audio streaming.**
 
-A Wayland-native video and audio viewer for the Ultimate64 Commodore 64 implementation. It decodes proprietary UDP streams to display C64 video and audio on your modern desktop.
+[View on GitHub](https://github.com/kcalvelli/c64-stream-viewer)
+
+## Overview
+
+A Python-based viewer that decodes proprietary UDP packets from the Ultimate 64 hardware. It features a custom decoder for the 4-bit VIC-II color format and provides low-latency video and audio playback on Wayland systems.
 
 ## Architecture
 
+The application listens for UDP packets from the Ultimate 64 and renders them using Pygame/SDL2.
+
 ```mermaid
-graph TD
-    subgraph Hardware
-        U64[Ultimate64 Device]
-    end
+C4Component
+    title Component Diagram for C64 Stream Viewer
 
-    subgraph Host Machine
-        subgraph App
-            CSV[c64-stream-viewer]
-            PyAudio[PyAudio/PortAudio]
-            SDL[SDL2 / PyGame]
-        end
-        Wayland[Wayland Compositor]
-    end
+    Person(user, "User", "Viewer")
+    Component(viewer, "Stream Viewer", "Python/Pygame", "Decodes and displays video/audio")
+    System_Ext(u64, "Ultimate 64", "Hardware", "Streams UDP packets")
 
-    U64 -->|UDP 11000 Video| CSV
-    U64 -->|UDP 11001 Audio| CSV
-    CSV -->|TCP 64 Control| U64
-    
-    CSV -->|Audio| PyAudio
-    CSV -->|Video| SDL
-    SDL --> Wayland
+    Rel(user, viewer, "Views stream")
+    Rel(u64, viewer, "Sends Video/Audio Packets", "UDP")
 ```
 
 ## Onboarding
 
-**Try without installing:**
+To run the complete A/V viewer directly:
+
 ```bash
 nix run github:kcalvelli/c64-stream-viewer#av
 ```
 
-**Variants:**
-- `#av`: Audio + Video (Recommended)
-- `#video`: Video only
-- `#headless`: Stats only
+See the [README](https://github.com/kcalvelli/c64-stream-viewer) for installation and other modes (video-only, headless).
 
-## Latest Status
+## Release History
 
-**Version:** v1.0.0  
-**Published:** 2025-12-31
-
-**Features:**
-- Native Wayland rendering
-- Perfect audio quality (47976 Hz)
-- Packet loss detection
+| Version | Date | Status |
+| :--- | :--- | :--- |
+| v1.0.0 | 2025-12-31 | ✅ Latest |

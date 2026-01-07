@@ -1,85 +1,70 @@
-# Axios Library
+# axiOS
 
-**Repo:** [kcalvelli/axios](https://github.com/kcalvelli/axios)
+**A modular NixOS framework and library for building reproducible systems.**
 
-A modular NixOS distribution designed for flexibility and ease of use. It provides a structured way to manage NixOS configurations with a focus on VM support and developer tooling.
+[View on GitHub](https://github.com/kcalvelli/axios)
+
+## Overview
+
+axiOS is a **NixOS framework and library** that you import into your own flake to build NixOS configurations. It acts as a curated collection of modules, packages, and home-manager configs that work together to provide a polished desktop experience (Niri, DankMaterialShell), development tools, and system configuration.
+
+Key features include:
+*   **Desktop Experience:** Niri compositor, DankMaterialShell, Ghostty terminal, and GPU acceleration.
+*   **Development:** Multi-language environments (Rust, Zig, Python, Node.js) and DevShells.
+*   **Infrastructure:** Declarative disks, Secure boot (Lanzaboote), and Virtualization.
 
 ## Architecture
 
-This diagram illustrates how `axios` sits at the core of the ecosystem, aggregating upstream dependencies like `nixpkgs` and `home-manager` while providing modules for downstream user configurations and ecosystem tools.
+axiOS integrates with NixOS and Home Manager to provide a cohesive system configuration.
 
 ```mermaid
-graph TD
-    subgraph Upstream
-        NP[nixpkgs]
-        HM[home-manager]
-        LZ[lanzaboote]
-    end
+C4Context
+    title System Context Diagram for axiOS
 
-    subgraph Core System
-        AX[axios]
-    end
+    Person(user, "User", "NixOS User")
+    System(axios, "axiOS", "NixOS Framework & Library")
+    System_Ext(nixpkgs, "Nixpkgs", "Nix Package Repository")
+    System_Ext(hm, "Home Manager", "User Environment Manager")
+    System_Ext(nixos, "NixOS", "Operating System")
 
-    subgraph Ecosystem Tools
-        AM[axios-monitor]
-        MJ[mcp-journal]
-        U64[Ultimate64MCP]
-        C64[c64-stream-viewer]
-        BP[brave-browser-previews]
-    end
-
-    subgraph User Space
-        UC[User Config]
-        WS[Workstations]
-        VM[Virtual Machines]
-    end
-
-    NP --> AX
-    HM --> AX
-    LZ --> AX
-
-    AX --> UC
-    UC --> WS
-    UC --> VM
-
-    AX -.-> AM
-    AX -.-> MJ
-    AX -.-> U64
-    AX -.-> C64
-    AX -.-> BP
+    Rel(user, axios, "Configures via flake.nix", "Nix")
+    Rel(axios, nixpkgs, "Consumes packages from")
+    Rel(axios, hm, "Configures user environment via")
+    Rel(axios, nixos, "Builds system configuration for")
 ```
 
-**Key Components:**
-- **Flake Structure:** Uses `flake-parts` for modularity.
-- **Modules:** Custom NixOS modules located in `modules/`.
-- **Packages:** Custom packages (like overlays) in `pkgs/`.
-- **DevShells:** Pre-configured environments for developers.
+The system is designed as a library (`axios.lib.mkSystem`) rather than a monolithic config, allowing for high modularity and customization.
 
 ## Onboarding
 
-To start using axiOS for a new configuration:
+To get started with a new configuration:
 
 ```bash
-nix run --refresh github:kcalvelli/axios#init
+mkdir ~/my-nixos-config && cd ~/my-nixos-config
+nix run --refresh --extra-experimental-features "nix-command flakes" github:kcalvelli/axios#init
 ```
 
-For existing users, update your input:
+For manual setup, you typically create:
+*   `flake.nix` (imports axios)
+*   `user.nix` (user settings)
+*   `hardware.nix` (hardware config)
 
-```bash
-nix flake lock --update-input axios
-```
+See [docs/INSTALLATION.md](https://github.com/kcalvelli/axios/blob/master/docs/INSTALLATION.md) in the repo for details.
 
-### Dev Shells
-The project provides several development shells. Check `devshells.nix` or running `nix develop` in the root.
+## Release History
 
-## Latest Status
-
-**Version:** v2025.12.11  
-**Published:** 2025-12-11
-
-### Highlights
-- **VM Support Fixed:** Now works correctly in QEMU/KVM, VMware, and VirtualBox.
-- **Simplified Hardware Config:** New `hardwareConfigPath` option.
-- **Backward Compatible:** Existing configurations continue to work.
-
-> **Note:** axiOS requires UEFI boot mode.
+| Version | Date | Status |
+| :--- | :--- | :--- |
+| v2025.12.11 | 2025-12-11 | ✅ Latest |
+| v2025.12.04 | 2025-12-04 | |
+| v2025.11.21 | 2025-11-21 | |
+| v2025.11.19 | 2025-11-19 | |
+| v2025.11.18 | 2025-11-18 | |
+| v2025.11.13 | 2025-11-13 | |
+| 2025-11-08.1 | 2025-11-08 | |
+| v2025.11.08 | 2025-11-08 | |
+| 2025-11-04 | 2025-11-04 | |
+| 2025.10.30 | 2025-10-30 | |
+| 2025-10-27 | 2025-10-27 | |
+| 2025.10.25 | 0001-01-01 | |
+| 2025.10.25 | 0001-01-01 | |

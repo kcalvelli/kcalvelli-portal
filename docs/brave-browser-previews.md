@@ -1,43 +1,45 @@
 # Brave Browser Previews
 
-**Repo:** [kcalvelli/brave-browser-previews](https://github.com/kcalvelli/brave-browser-previews)
+**A Nix Flake that provides the latest Nightly and Beta versions of Brave Browser for Linux.**
 
-Provides Nix flake outputs for Brave Browser Nightly and Beta builds. This allows users to run bleeding-edge versions of Brave on NixOS without waiting for upstream `nixpkgs` updates.
+[View on GitHub](https://github.com/kcalvelli/brave-browser-previews)
+
+## Overview
+
+This repository provides an automated way to get the latest **Brave Nightly** and **Brave Beta** builds on NixOS. It is automatically updated daily to track official Brave GitHub releases. It includes both a NixOS module for declarative configuration and standalone packages.
 
 ## Architecture
 
+This project functions as a bridge between Brave's binary releases and the Nix ecosystem.
+
 ```mermaid
-graph LR
-    subgraph Upstream
-        Brave[Brave Binaries .deb/.rpm]
-        NixPkgs[nixpkgs]
-    end
+C4Component
+    title Component Diagram for Brave Browser Previews
 
-    subgraph Flake
-        BBP[brave-browser-previews]
-    end
+    Person(user, "User", "NixOS User")
+    Component(flake, "Flake", "Nix Flake", "Provides Brave packages and modules")
+    System_Ext(brave_releases, "Brave Releases", "GitHub Releases", "Source of binaries")
 
-    subgraph Output
-        BN[brave-nightly]
-        BB[brave-beta]
-    end
-
-    Brave --> BBP
-    NixPkgs --> BBP
-    BBP --> BN
-    BBP --> BB
+    Rel(user, flake, "Imports as input or runs via nix run")
+    Rel(flake, brave_releases, "Fetches nightly/beta binaries daily")
 ```
 
 ## Onboarding
 
-Run the browser directly:
+You can run the browsers directly without installation:
 
 ```bash
+# Run Nightly
 nix run github:kcalvelli/brave-browser-previews#brave-nightly
-# or
+
+# Run Beta
 nix run github:kcalvelli/brave-browser-previews#brave-beta
 ```
 
-## Latest Status
+For NixOS installation, add it as a flake input and import the module. See the [README](https://github.com/kcalvelli/brave-browser-previews) for details.
 
-**Release:** *Rolling updates tracking upstream Brave releases*
+## Release History
+
+| Version | Date | Status |
+| :--- | :--- | :--- |
+| - | - | No releases found |
