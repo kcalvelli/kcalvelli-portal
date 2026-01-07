@@ -10,18 +10,25 @@ A Python-based viewer that decodes proprietary UDP packets from the Ultimate 64 
 
 ## Architecture
 
-The application listens for UDP packets from the Ultimate 64 and renders them using Pygame/SDL2.
+The application is a multi-threaded Python pipeline that processes UDP streams in real-time.
 
 ```mermaid
-C4Component
-    title Component Diagram for C64 Stream Viewer
+C4Container
+    title Container Diagram for C64 Stream Viewer
 
     Person(user, "User", "Viewer")
-    Component(viewer, "Stream Viewer", "Python/Pygame", "Decodes and displays video/audio")
-    System_Ext(u64, "Ultimate 64", "Hardware", "Streams UDP packets")
+    System_Ext(u64, "Ultimate 64", "Hardware", "Broadcasts UDP Stream")
 
-    Rel(user, viewer, "Views stream")
-    Rel(u64, viewer, "Sends Video/Audio Packets", "UDP")
+    Container_Boundary(app, "Application") {
+        Component(net, "Network Thread", "Python/Socket", "Receives UDP packets on ports 11000 (Video) / 11001 (Audio)")
+        Component(decoder, "Packet Decoder", "Python/NumPy", "Decodes VIC-II 4-bit color & PCM audio")
+        Component(renderer, "Renderer", "Pygame/SDL2", "Renders to Wayland Surface")
+    }
+
+    Rel(u64, net, "Sends UDP Stream")
+    Rel(net, decoder, "Passes Raw Bytes")
+    Rel(decoder, renderer, "Passes RGB Frames / Audio Samples")
+    Rel(user, renderer, "Watches")
 ```
 
 ## Onboarding

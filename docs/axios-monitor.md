@@ -10,20 +10,30 @@ A plugin for [DankMaterialShell](https://danklinux.com/) specifically designed f
 
 ## Architecture
 
-The plugin integrates into the desktop shell and communicates with the underlying NixOS system.
+The plugin acts as a frontend for system management tasks, interacting with the Nix store and system rebuild commands.
 
 ```mermaid
-C4Component
-    title Component Diagram for axiOS Monitor
+C4Container
+    title Container Diagram for axiOS Monitor
 
-    Person(user, "User", "NixOS User")
-    Component(plugin, "axiOS Monitor", "DankMaterialShell Plugin", "UI for system updates")
-    System_Ext(nixos, "NixOS System", "OS", "Handles rebuilds")
-    System_Ext(github, "GitHub", "Remote", "Checks for updates")
+    Person(user, "User", "Desktop User")
+    
+    Container_Boundary(dms, "DankMaterialShell (Desktop)") {
+        Component(widget, "Status Widget", "QML", "Displays icons & stats in panel")
+        Component(popup, "Detail Popup", "QML", "Shows logs, version info & action buttons")
+    }
 
-    Rel(user, plugin, "Interacts with")
-    Rel(plugin, nixos, "Triggers rebuilds")
-    Rel(plugin, github, "Checks version")
+    Container_Boundary(system, "System Context") {
+        Component(scripts, "Helper Scripts", "Bash", "Parses flake.lock, checks updates")
+        Component(nixos, "NixOS Rebuild", "System Command", "nixos-rebuild switch/boot")
+        Component(store, "Nix Store", "Filesystem", "Checks usage size")
+    }
+
+    Rel(user, widget, "Views status")
+    Rel(user, popup, "Clicks Rebuild / Update")
+    Rel(widget, scripts, "Polls status")
+    Rel(popup, nixos, "Executes rebuild")
+    Rel(scripts, store, "Reads size")
 ```
 
 ## Onboarding
