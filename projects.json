@@ -4,5 +4,6 @@
   "kcalvelli/c64-stream-viewer",
   "kcalvelli/Ultimate64MCP",
   "kcalvelli/axios-monitor",
-  "kcalvelli/mcp-journal"
+  "kcalvelli/mcp-journal",
+  "kcalvelli/c64term"
 ]
