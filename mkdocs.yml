@@ -17,9 +17,14 @@ nav:
   - Dashboard: index.md
   - Core System:
       - Axios Library: axios.md
-  - Ecosystem & Tools:
+  - Axios Ecosystem:
       - Axios Monitor: axios-monitor.md
-      - Brave Previews: brave-browser-previews.md
+  - Commodore 64 Tools:
       - C64 Stream Viewer: c64-stream-viewer.md
       - Ultimate64 MCP: Ultimate64MCP.md
+      - C64 Terminal: c64term.md
+  - MCP Servers:
+      - Ultimate64 MCP: Ultimate64MCP.md
       - MCP Journal: mcp-journal.md
+  - Browser Tools:
+      - Brave Previews: brave-browser-previews.md

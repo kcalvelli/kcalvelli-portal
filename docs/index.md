@@ -1,57 +1,46 @@
-# Engineering Portal Dashboard
+# Project Portfolio Dashboard
 
-Welcome to the Engineering Documentation Portal. This site provides comprehensive documentation for axiOS and its ecosystem tools.
+Welcome to the project portfolio. This dashboard provides an organized view of all projects, grouped by category.
 
 ## Core System
 
-### axiOS Framework
-
-**A modular NixOS distribution** - The foundation of the entire ecosystem.
+Foundational framework projects
 
 | Project | Description | Repository |
 |---------|-------------|------------|
-| **axiOS** | A modular NixOS distribution providing declarative system configuration with enhanced modularity and composability. | [kcalvelli/axios](https://github.com/kcalvelli/axios) |
+| [Axios Library](axios.md) | A modular NixOS distribution | [kcalvelli/axios](https://github.com/kcalvelli/axios) |
 
-**Key Features:**
+## Axios Ecosystem
 
-- Declarative configuration management
-- Deep NixOS and Home Manager integration
-- Modular architecture for extensibility
-- Designed for reproducible system builds
+Tools designed for the axiOS framework
 
-[View Full Documentation](axios.md)
+| Project | Description | Repository |
+|---------|-------------|------------|
+| [Axios Monitor](axios-monitor.md) | DMS plugin for monitoring and managing nix systems | [kcalvelli/axios-monitor](https://github.com/kcalvelli/axios-monitor) |
 
----
+## Commodore 64 Tools
 
-## Ecosystem & Tools
+Projects for Commodore 64 hardware and emulation
 
-The following projects extend and complement the axiOS framework, providing specialized functionality for monitoring, development, and hardware integration.
+| Project | Description | Repository |
+|---------|-------------|------------|
+| [C64 Stream Viewer](c64-stream-viewer.md) | Wayland-native viewer for Ultimate64 video/audio streaming | [kcalvelli/c64-stream-viewer](https://github.com/kcalvelli/c64-stream-viewer) |
+| [Ultimate64 MCP](Ultimate64MCP.md) | MCP server for Ultimate 64 series mainboards | [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP) |
+| [C64 Terminal](c64term.md) | Terminal for Commodore 64 | [kcalvelli/c64term](https://github.com/kcalvelli/c64term) |
 
-| Project | Description | Technology | Repository |
-|---------|-------------|------------|------------|
-| **Axios Monitor** | DMS plugin for monitoring and managing nix systems | Python/GTK | [kcalvelli/axios-monitor](https://github.com/kcalvelli/axios-monitor) |
-| **Brave Browser Previews** | Preview management extension for Brave Browser | Browser Extension | [kcalvelli/brave-browser-previews](https://github.com/kcalvelli/brave-browser-previews) |
-| **C64 Stream Viewer** | Wayland-native viewer for Ultimate64 video/audio streaming with VIC-II color conversion | Rust/Wayland | [kcalvelli/c64-stream-viewer](https://github.com/kcalvelli/c64-stream-viewer) |
-| **Ultimate64 MCP** | MCP server for the Ultimate 64 series mainboards and cartridges | Python/MCP | [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP) |
-| **MCP Journal** | Journal management via Model Context Protocol | Python/MCP | [kcalvelli/mcp-journal](https://github.com/kcalvelli/mcp-journal) |
+## MCP Servers
 
-### Quick Links
+Model Context Protocol server implementations
 
-- [Axios Monitor Documentation](axios-monitor.md)
-- [Brave Previews Documentation](brave-browser-previews.md)
-- [C64 Stream Viewer Documentation](c64-stream-viewer.md)
-- [Ultimate64 MCP Documentation](Ultimate64MCP.md)
-- [MCP Journal Documentation](mcp-journal.md)
+| Project | Description | Repository |
+|---------|-------------|------------|
+| [Ultimate64 MCP](Ultimate64MCP.md) | MCP server for Ultimate 64 series mainboards | [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP) |
+| [MCP Journal](mcp-journal.md) | Journal management via Model Context Protocol | [kcalvelli/mcp-journal](https://github.com/kcalvelli/mcp-journal) |
 
----
+## Browser Tools
 
-## About This Portal
+Browser extensions and web tools
 
-This documentation portal is automatically generated and maintained to provide up-to-date information about all projects in the axiOS ecosystem. Each project page includes:
-
-- Architectural overview with C4 diagrams
-- Onboarding and development instructions
-- Complete release history
-- Links to source repositories
-
-**Last Updated:** 2026-01-07
+| Project | Description | Repository |
+|---------|-------------|------------|
+| [Brave Previews](brave-browser-previews.md) | Preview management extension for Brave Browser | [kcalvelli/brave-browser-previews](https://github.com/kcalvelli/brave-browser-previews) |

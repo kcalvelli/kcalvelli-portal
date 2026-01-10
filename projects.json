@@ -1,9 +1,80 @@
-[
-  "kcalvelli/axios",
-  "kcalvelli/brave-browser-previews",
-  "kcalvelli/c64-stream-viewer",
-  "kcalvelli/Ultimate64MCP",
-  "kcalvelli/axios-monitor",
-  "kcalvelli/mcp-journal",
-  "kcalvelli/c64term"
-]
+{
+  "projects": [
+    {
+      "repo": "kcalvelli/axios",
+      "displayName": "Axios Library",
+      "description": "A modular NixOS distribution",
+      "tags": ["core", "nix"],
+      "diagramType": "C4Context"
+    },
+    {
+      "repo": "kcalvelli/axios-monitor",
+      "displayName": "Axios Monitor",
+      "description": "DMS plugin for monitoring and managing nix systems",
+      "tags": ["axios", "monitoring"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/brave-browser-previews",
+      "displayName": "Brave Previews",
+      "description": "Preview management extension for Brave Browser",
+      "tags": ["browser", "extension"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/c64-stream-viewer",
+      "displayName": "C64 Stream Viewer",
+      "description": "Wayland-native viewer for Ultimate64 video/audio streaming",
+      "tags": ["commodore64", "wayland"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/Ultimate64MCP",
+      "displayName": "Ultimate64 MCP",
+      "description": "MCP server for Ultimate 64 series mainboards",
+      "tags": ["commodore64", "mcp-server"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/mcp-journal",
+      "displayName": "MCP Journal",
+      "description": "Journal management via Model Context Protocol",
+      "tags": ["mcp-server", "systemd"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/c64term",
+      "displayName": "C64 Terminal",
+      "description": "Terminal for Commodore 64",
+      "tags": ["commodore64", "terminal"],
+      "diagramType": "C4Component"
+    }
+  ],
+  "tagDefinitions": {
+    "core": {
+      "displayName": "Core System",
+      "description": "Foundational framework projects",
+      "order": 1
+    },
+    "axios": {
+      "displayName": "Axios Ecosystem",
+      "description": "Tools designed for the axiOS framework",
+      "order": 2
+    },
+    "commodore64": {
+      "displayName": "Commodore 64 Tools",
+      "description": "Projects for Commodore 64 hardware and emulation",
+      "order": 3
+    },
+    "mcp-server": {
+      "displayName": "MCP Servers",
+      "description": "Model Context Protocol server implementations",
+      "order": 4
+    },
+    "browser": {
+      "displayName": "Browser Tools",
+      "description": "Browser extensions and web tools",
+      "order": 5
+    }
+  }
+}

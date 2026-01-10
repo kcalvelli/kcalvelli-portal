@@ -6,18 +6,21 @@ You are a Technical Documentation Architect. Your goal is to update the document
 
 - **Tooling:** Use `gh` CLI for all network operations.
 - **Output:** Write standard Markdown files to the `docs/` directory.
-- **Config:** Read `projects.json` for the list of repositories to process.
-- **Primary Project:** `kcalvelli/axios` is the core library. All other projects are ecosystem tools.
+- **Config:** Read `projects.json` for the list of repositories and their metadata.
+  - Each project has: `repo`, `displayName`, `description`, `tags[]`, and `diagramType`
+  - `tagDefinitions` contains display information for each tag category
 
 ## Execution Steps
 
 ### 1. Preparation
 
-1. Read `projects.json`.
+1. Read `projects.json` and parse the `projects` array and `tagDefinitions` object.
 2. Ensure a `docs/` directory exists.
 3. Create an `index.md` in `docs/` acting as a dashboard.
-   - **Requirement:** Highlight `kcalvelli/axios` prominently as the Core System.
-   - List other projects in a secondary "Ecosystem" table.
+   - Group projects by their primary tag (first tag in the tags array)
+   - Use `tagDefinitions` to get the display name and order for each section
+   - Create a section for each tag category with a table of its projects
+   - Include: displayName, description, and repository link for each project
 
 ### 2. Processing (Iterate for each repo)
 
@@ -42,20 +45,17 @@ For each repo in the list:
        - Add styling: `UpdateElementStyle()` for key components to create visual hierarchy
        - Use `UpdateLayoutConfig($c4ShapeInRow="3")` when there are 5+ elements for better spacing
 
-     - **For `kcalvelli/axios`:**
-       - STRICTLY synthesize a **C4Context** diagram
-       - Show: User, axiOS Framework, and external systems (NixOS, Home Manager, Nixpkgs)
-       - Emphasize the declarative configuration flow (User writes Nix → axiOS transforms → NixOS builds)
-       - Style the axios system distinctly using UpdateElementStyle
-
-     - **For ecosystem tools:**
-       - STRICTLY synthesize **C4Component** diagrams
-       - Break the tool into 2-3 logical components if it has distinct layers (UI + Logic, Server + Client, etc.)
-       - Show WHERE components run using boundaries (e.g., "Desktop Environment", "Network Layer", "Hardware")
-       - For network-based tools, explicitly show protocols (UDP, HTTP, SSE, MCP)
-       - For bridge/adapter patterns (like MCP servers), show three layers: Client → Adapter → Target System
-       - Use `System_Ext()` for hardware devices, external APIs, or services outside the repo
-       - Show relationship to `axios` when it's a dependency or when the tool is designed for axiOS
+     - **Use the `diagramType` field from projects.json to determine diagram type:**
+       - **C4Context diagrams:** Show high-level system context with users, the system itself, and external systems
+         - Example: User → Main System → External Dependencies
+         - Emphasize the primary purpose and key external interactions
+         - Style the main system distinctly using UpdateElementStyle
+       - **C4Component diagrams:** Show internal architecture with logical components
+         - Break the tool into 2-3 logical components if it has distinct layers (UI + Logic, Server + Client, etc.)
+         - Show WHERE components run using boundaries (e.g., "Desktop Environment", "Network Layer", "Hardware")
+         - For network-based tools, explicitly show protocols (UDP, HTTP, SSE, MCP)
+         - For bridge/adapter patterns (like MCP servers), show three layers: Client → Adapter → Target System
+         - Use `System_Ext()` for hardware devices, external APIs, or services outside the repo
    - Check `flake.nix` or `default.nix` specifically to identify dependencies.
 
 3. **Write Output (`docs/<repo-name>.md`):**
@@ -68,16 +68,29 @@ For each repo in the list:
 
 ### 3. Finalization
 
-1. Update `mkdocs.yml` to include the new pages in the `nav` section. **Enforce this exact hierarchy:**
+1. Update `mkdocs.yml` to include the new pages in the `nav` section. **Generate navigation dynamically from projects.json:**
 
+   - Start with `Dashboard: index.md`
+   - Group projects by their primary tag (first tag in tags array)
+   - Sort tag groups by the `order` field in `tagDefinitions`
+   - Use the tag's `displayName` from `tagDefinitions` as the section header
+   - Under each section, list projects using their `displayName` from projects.json
+   - Link to `<repo-name>.md` (extract repo name from the full repo path)
+
+   Example structure:
    ```yaml
    nav:
      - Dashboard: index.md
      - Core System:
          - Axios Library: axios.md
-     - Ecosystem & Tools:
+     - Axios Ecosystem:
          - Axios Monitor: axios-monitor.md
-         - Brave Previews: brave-browser-previews.md
+     - Commodore 64 Tools:
          - C64 Stream Viewer: c64-stream-viewer.md
          - Ultimate64 MCP: Ultimate64MCP.md
+         - C64 Terminal: c64term.md
+     - MCP Servers:
+         - Ultimate64 MCP: Ultimate64MCP.md
          - MCP Journal: mcp-journal.md
+     - Browser Tools:
+         - Brave Previews: brave-browser-previews.md
