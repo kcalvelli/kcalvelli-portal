@@ -4,21 +4,21 @@
       "repo": "kcalvelli/axios",
       "displayName": "Axios Library",
       "description": "A modular NixOS distribution",
-      "tags": ["core", "nix"],
+      "tags": ["os", "nix"],
       "diagramType": "C4Context"
     },
     {
       "repo": "kcalvelli/axios-monitor",
       "displayName": "Axios Monitor",
-      "description": "DMS plugin for monitoring and managing nix systems",
-      "tags": ["axios", "monitoring"],
+      "description": "DMS plugin for monitoring and managing axiOS systems",
+      "tags": ["axios", "monitoring", "fork"],
       "diagramType": "C4Component"
     },
     {
       "repo": "kcalvelli/brave-browser-previews",
       "displayName": "Brave Previews",
-      "description": "Preview management extension for Brave Browser",
-      "tags": ["browser", "extension"],
+      "description": "Nightly and Beta builds of Brave Browser with preview features",
+      "tags": ["pkgs", "browser"],
       "diagramType": "C4Component"
     },
     {
@@ -31,7 +31,7 @@
     {
       "repo": "kcalvelli/Ultimate64MCP",
       "displayName": "Ultimate64 MCP",
-      "description": "MCP server for Ultimate 64 series mainboards",
+      "description": "Flake to provide MCP server for Ultimate 64 series mainboards",
       "tags": ["commodore64", "mcp-server"],
       "diagramType": "C4Component"
     },
@@ -51,9 +51,9 @@
     }
   ],
   "tagDefinitions": {
-    "core": {
-      "displayName": "Core System",
-      "description": "Foundational framework projects",
+    "os": {
+      "displayName": "System",
+      "description": "System Frameworks",
       "order": 1
     },
     "axios": {
@@ -71,9 +71,9 @@
       "description": "Model Context Protocol server implementations",
       "order": 4
     },
-    "browser": {
-      "displayName": "Browser Tools",
-      "description": "Browser extensions and web tools",
+    "pkgs": {
+      "displayName": "Nix Packages",
+      "description": "Flakes to provide packages not included in nixpkgs",
       "order": 5
     }
   }

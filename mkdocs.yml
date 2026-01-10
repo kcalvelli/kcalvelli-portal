@@ -15,7 +15,7 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
 nav:
   - Dashboard: index.md
-  - Core System:
+  - System:
       - Axios Library: axios.md
   - Axios Ecosystem:
       - Axios Monitor: axios-monitor.md
@@ -24,7 +24,6 @@ nav:
       - Ultimate64 MCP: Ultimate64MCP.md
       - C64 Terminal: c64term.md
   - MCP Servers:
-      - Ultimate64 MCP: Ultimate64MCP.md
       - MCP Journal: mcp-journal.md
-  - Browser Tools:
+  - Nix Packages:
       - Brave Previews: brave-browser-previews.md

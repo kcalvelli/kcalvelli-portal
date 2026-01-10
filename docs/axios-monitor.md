@@ -1,6 +1,6 @@
 # axiOS Monitor
 
-**A DMS plugin for monitoring and managing nix systems**
+**DMS plugin for monitoring and managing axiOS systems**
 
 [View on GitHub](https://github.com/kcalvelli/axios-monitor)
 

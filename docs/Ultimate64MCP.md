@@ -1,6 +1,6 @@
 # Ultimate64 MCP
 
-**MCP server for the Ultimate 64 series mainboards and cartridges**
+**Flake to provide MCP server for Ultimate 64 series mainboards**
 
 [View on GitHub](https://github.com/kcalvelli/Ultimate64MCP)
 

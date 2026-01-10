@@ -1,6 +1,6 @@
 # Brave Browser Previews
 
-**Preview management extension for Brave Browser**
+**Nightly and Beta builds of Brave Browser with preview features**
 
 [View on GitHub](https://github.com/kcalvelli/brave-browser-previews)
 
