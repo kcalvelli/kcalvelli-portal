@@ -16,7 +16,13 @@ You are a Technical Documentation Architect. Your goal is to update the document
 
 1. Read `projects.json` and parse the `projects` array and `tagDefinitions` object.
 2. Ensure a `docs/` directory exists.
-3. Create an `index.md` in `docs/` acting as a dashboard.
+3. **Update** `index.md` in `docs/` acting as a dashboard. **IMPORTANT: Preserve existing personalization!**
+   - **DO NOT overwrite the header and bio sections** (lines before the first `## System` or tag section)
+   - If updating an existing index.md, read it first and preserve:
+     - The personalized title (e.g., "Keith Calvelli's Project Portfolio")
+     - The welcome/bio paragraph
+     - Any "About My Work" or similar sections before the project tables
+   - **ONLY update the project tables** (from the first tag section onwards)
    - Group projects by their primary tag (first tag in the tags array)
    - Use `tagDefinitions` to get the display name and order for each section
    - Create a section for each tag category with a table of its projects
