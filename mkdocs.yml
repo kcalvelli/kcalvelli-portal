@@ -25,5 +25,6 @@ nav:
       - C64 Terminal: c64term.md
   - MCP Servers:
       - MCP Journal: mcp-journal.md
+      - Nix Devshell MCP: nix-devshell-mcp.md
   - Nix Packages:
       - Brave Previews: brave-browser-previews.md

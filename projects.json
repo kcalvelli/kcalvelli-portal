@@ -48,6 +48,13 @@
       "description": "Terminal for Commodore 64",
       "tags": ["commodore64", "terminal"],
       "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/nix-devshell-mcp",
+      "displayName": "Nix Devshell MCP",
+      "description": "Creation of Nix devshells via Model Context Protocol",
+      "tags": ["mcp-server", "nix", "development"],
+      "diagramType": "C4Component"
     }
   ],
   "tagDefinitions": {
@@ -75,6 +82,16 @@
       "displayName": "Nix Packages",
       "description": "Flakes to provide packages not included in nixpkgs",
       "order": 5
+    },
+    "nix": {
+      "displayName": "Nix Development",
+      "description": "Tools for Nix development and ecosystem",
+      "order": 6
+    },
+    "development": {
+      "displayName": "Development Tools",
+      "description": "General development and tooling utilities",
+      "order": 7
     }
   }
 }

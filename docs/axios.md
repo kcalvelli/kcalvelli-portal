@@ -1,116 +1,123 @@
-# axiOS
-
-**A modular NixOS distribution**
-
-[View on GitHub](https://github.com/kcalvelli/axios)
+# Axios Library
 
 ## Overview
 
-axiOS is a **NixOS framework and library** that you import into your own flake to build NixOS configurations. Think of it as a curated collection of modules, packages, and home-manager configs that work together seamlessly. You maintain just a few simple files (~30 lines), and axios provides everything else: desktop environment, development tools, system configuration, and more.
+**axiOS** is a modular NixOS framework and library designed for building reproducible systems with curated desktop environments, development tools, and modern workflows. It follows a library design philosophy, allowing users to import it into their own flakes and maintain minimal configuration while benefiting from a full-featured system.
 
-**Key Features:**
-
-* **Desktop Experience:** Niri scrollable tiling compositor with workspace overview, DankMaterialShell with Material Design widgets, Ghostty GPU-accelerated terminal, automatic GPU hardware acceleration (AMD/NVIDIA)
-* **Development:** Multi-language environments (Rust, Zig, Python, Node.js) with LSP support, project-specific DevShells, organized development tools
-* **Infrastructure:** Declarative disk management (Disko), Secure Boot (Lanzaboote), Virtualization (libvirt, QEMU, Podman), Hardware optimization (desktop/laptop)
-* **Applications:** 80+ curated applications, PWAs integrated as native apps, GNOME Software with Flathub pre-configured
-* **Workflow Philosophy:** Focused, distraction-free single-monitor workflow with maximized windows by default, strategic floating utilities, and instant dropdown terminal (Super+`)
+**Repository:** [kcalvelli/axios](https://github.com/kcalvelli/axios)
 
 ## Architecture
 
-axiOS operates as a declarative configuration framework that sits between the user and NixOS, transforming simple configuration files into complete system builds. The architecture emphasizes the declarative flow from user intent to system realization.
-
 ```mermaid
 C4Context
-    title System Context Diagram for axiOS Framework
+    title System Context: axiOS Framework
 
+    Person(user, "System User", "Developer or desktop user")
+    
+    System_Boundary(axios_boundary, "axiOS Framework") {
+        System(axios, "axiOS", "Nix/NixOS", "Modular NixOS framework providing desktop, development, and system modules")
+    }
+    
+    System_Ext(nixpkgs, "NixOS/nixpkgs", "Base NixOS system and package repository")
+    System_Ext(home_manager, "Home Manager", "User environment management")
+    System_Ext(flathub, "Flathub", "Application distribution platform")
+    System_Ext(github, "GitHub", "Source repository and updates")
+    System_Ext(niri, "Niri Compositor", "Wayland compositor with scrollable tiling")
+    System_Ext(dms, "DankMaterialShell", "Material Design shell and widgets")
+    
+    Rel(user, axios, "Configures system via", "Nix flakes")
+    BiRel(axios, nixpkgs, "Extends and builds upon", "Nix modules")
+    Rel(axios, home_manager, "Integrates for user config", "Nix modules")
+    Rel(axios, flathub, "Provides app distribution", "Flatpak")
+    Rel(axios, github, "Fetches updates from", "Git/Nix")
+    Rel(axios, niri, "Includes and configures", "Wayland protocol")
+    Rel(axios, dms, "Integrates desktop shell", "IPC")
+    
+    UpdateElementStyle(axios, $bgColor="#4A90E2", $fontColor="#FFFFFF", $borderColor="#2E5C8A")
     UpdateLayoutConfig($c4ShapeInRow="3")
-
-    Person(user, "NixOS User", "System administrator writing declarative configurations")
-
-    System(axios, "axiOS Framework", "Nix Flake Library")
-
-    Container_Boundary(nix_ecosystem, "Nix Ecosystem") {
-        System_Ext(nixpkgs, "Nixpkgs", "Package Repository")
-        System_Ext(homeManager, "Home Manager", "User Environment Manager")
-        System_Ext(nixos, "NixOS", "Linux Distribution")
-    }
-
-    Container_Boundary(axios_inputs, "axiOS Dependencies") {
-        System_Ext(niri, "Niri Flake", "Wayland Compositor")
-        System_Ext(dms, "DankMaterialShell", "GTK/QML Desktop Shell")
-        System_Ext(lanzaboote, "Lanzaboote", "Secure Boot")
-    }
-
-    Rel(user, axios, "Writes declarative config", "flake.nix (~30 lines)")
-    Rel(axios, nixos, "Generates system configuration", "Nix expressions")
-    BiRel(axios, homeManager, "Configures user environment", "Home Manager modules")
-    Rel(axios, nixpkgs, "Imports packages", "Nix package references")
-
-    Rel(axios, niri, "Integrates compositor", "Flake input")
-    Rel(axios, dms, "Integrates shell", "Flake input")
-    Rel(axios, lanzaboote, "Provides secure boot", "Flake input")
-
-    Rel(nixos, user, "Builds bootable system", "NixOS activation")
-
-    UpdateElementStyle(axios, $bgColor="#2196F3", $fontColor="#FFFFFF", $borderColor="#1976D2")
-    UpdateElementStyle(user, $bgColor="#4CAF50", $fontColor="#FFFFFF")
 ```
 
-**Architectural Assumptions:**
+### Architectural Assumptions
 
-* **Declarative Flow:** Users write minimal configuration files (flake.nix, user.nix, hardware.nix totaling ~60 lines), and axiOS expands these into complete NixOS system configurations
-* **Library Design:** axiOS exports `axios.lib.mkSystem` function that accepts structured parameters (hostname, formFactor, hardware, modules, user/hardware paths) and returns a complete NixOS configuration
-* **Modular Composition:** Framework pulls together multiple specialized inputs (Niri compositor, DankMaterialShell, Lanzaboote) and presents them as cohesive, pre-integrated modules
-* **Separation of Concerns:** User configs remain simple and portable, while framework handles complexity of integrating 80+ applications, multiple desktop environments, and hardware-specific optimizations
-* **Flake-based Distribution:** Entire framework is distributed as a Nix flake with locked dependencies, allowing users to pin specific versions or update selectively
+axiOS is designed as a **framework/library** rather than a personal configuration:
+
+1. **Modular Architecture**: Users import axios into their flake and enable only needed features through the `modules` configuration
+2. **Minimal User Config**: Users maintain ~30 lines of configuration while axios provides the complete system
+3. **Multi-layer Integration**: Combines NixOS system modules, Home Manager user configs, and external applications (via Flathub)
+4. **External Dependencies**: Relies on established ecosystem projects (nixpkgs, home-manager, niri, etc.) rather than reimplementing functionality
+5. **Update Flexibility**: Users control when to update via `nix flake update`, allowing version pinning for stability
+
+The diagram shows axiOS as a central framework that orchestrates these external systems to provide a cohesive desktop and development experience.
 
 ## Onboarding
 
-**Prerequisites:** NixOS installed in UEFI mode (BIOS/MBR not supported)
+### Prerequisites
 
-### Interactive Generator (Recommended)
+- NixOS installed in UEFI mode (BIOS/MBR not supported)
+- Git installed
+- Nix flakes and commands enabled
 
-The fastest way to get started is using the interactive generator:
+### Quick Start with Interactive Generator (Recommended)
 
 ```bash
 mkdir ~/my-nixos-config && cd ~/my-nixos-config
 nix run --refresh --extra-experimental-features "nix-command flakes" github:kcalvelli/axios#init
 ```
 
-The generator creates a complete configuration tailored to your system in minutes.
+The `--refresh` flag ensures you get the latest version.
 
-### Manual Configuration
+### Manual Setup
 
-For manual setup, you'll create just 3 files:
+Create three files:
 
-* `flake.nix` - Import axios and configure your system (~30 lines)
-* `user.nix` - Your user account settings (~15 lines)
-* `hardware.nix` - Hardware configuration from nixos-generate-config
+1. **flake.nix** (~30 lines) - Import axios and configure your system
+2. **user.nix** (~15 lines) - Your user account settings
+3. **hardware.nix** - Hardware configuration from `nixos-generate-config`
+
+Example `flake.nix`:
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    axios.url = "github:kcalvelli/axios";
+  };
+
+  outputs = { self, nixpkgs, axios }: {
+    nixosConfigurations.myhost = axios.lib.mkSystem {
+      hostname = "myhost";
+      formFactor = "desktop";  # or "laptop"
+      hardware = { cpu = "amd"; gpu = "amd"; };
+      modules = { desktop = true; development = true; };
+      userModulePath = ./user.nix;
+      hardwareConfigPath = ./hardware.nix;
+    };
+  };
+}
+```
 
 ### Building and Deploying
 
-Once configured, build and deploy your system:
-
 ```bash
-# Build the configuration
-nix build .#nixosConfigurations.your-hostname.config.system.build.toplevel
+# Build the system
+nix build .#nixosConfigurations.myhost.config.system.build.toplevel
 
-# Deploy to your system
-sudo nixos-rebuild switch --flake .#your-hostname
+# Switch to the new configuration
+sudo nixos-rebuild switch --flake .#myhost
 ```
 
-### Additional Resources
+### Installing Additional Applications
 
-* [Installation Guide](https://github.com/kcalvelli/axios/blob/master/docs/INSTALLATION.md) - Complete step-by-step instructions
-* [Library API Reference](https://github.com/kcalvelli/axios/blob/master/docs/LIBRARY_USAGE.md) - Using `axios.lib.mkSystem`
-* [Application Catalog](https://github.com/kcalvelli/axios/blob/master/docs/APPLICATIONS.md) - See what's included
-* [Adding Multiple Hosts](https://github.com/kcalvelli/axios/blob/master/docs/ADDING_HOSTS.md) - Multi-host setups
+**Use Flathub (Recommended)**: Open GNOME Software and install applications from Flathub for sandboxed, independently-updating apps.
+
+**Declarative Packages**: Add packages to `extraConfig` in your host configuration for system-level tools and CLI utilities.
+
+For complete installation instructions, see the [Installation Guide](https://github.com/kcalvelli/axios/blob/main/docs/INSTALLATION.md).
 
 ## Release History
 
 | Version | Date | Status |
-| :--- | :--- | :--- |
+|---------|------|--------|
 | v2025.12.11 | 2025-12-11 | ✅ Latest |
 | v2025.12.04 | 2025-12-04 | |
 | v2025.11.21 | 2025-11-21 | |
@@ -122,5 +129,5 @@ sudo nixos-rebuild switch --flake .#your-hostname
 | 2025-11-04 | 2025-11-04 | |
 | 2025.10.30 | 2025-10-30 | |
 | 2025-10-27 | 2025-10-27 | |
-| 2025.10.25 | 0001-01-01 | |
-| 2025.10.25 | 0001-01-01 | |
+| 2025.10.25 | N/A | |
+| 2025.10.25 | N/A | |
