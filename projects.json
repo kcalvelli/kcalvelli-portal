@@ -2,14 +2,14 @@
   "projects": [
     {
       "repo": "kcalvelli/axios",
-      "displayName": "Axios Library",
+      "displayName": "axiOS",
       "description": "A modular NixOS distribution",
       "tags": ["os", "nix"],
       "diagramType": "C4Context"
     },
     {
       "repo": "kcalvelli/axios-monitor",
-      "displayName": "Axios Monitor",
+      "displayName": "axiOS Monitor",
       "description": "DMS plugin for monitoring and managing axiOS systems",
       "tags": ["axios", "monitoring", "fork"],
       "diagramType": "C4Component"
@@ -71,7 +71,7 @@
       "order": 1
     },
     "axios": {
-      "displayName": "Axios Ecosystem",
+      "displayName": "axiOS Ecosystem",
       "description": "Tools designed for the axiOS framework",
       "order": 2
     },

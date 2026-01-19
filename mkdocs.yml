@@ -16,9 +16,9 @@ markdown_extensions:
 nav:
   - Dashboard: index.md
   - System:
-      - Axios Library: axios.md
-  - Axios Ecosystem:
-      - Axios Monitor: axios-monitor.md
+      - axiOS: axios.md
+  - axiOS Ecosystem:
+      - axiOS Monitor: axios-monitor.md
       - axiOS AI Mail: axios-ai-mail.md
   - Commodore 64 Tools:
       - C64 Stream Viewer: c64-stream-viewer.md
