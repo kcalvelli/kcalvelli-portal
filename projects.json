@@ -55,6 +55,13 @@
       "description": "Creation of Nix devshells via Model Context Protocol",
       "tags": ["mcp-server", "nix", "development"],
       "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/axios-ai-mail",
+      "displayName": "axiOS AI Mail",
+      "description": "AI-powered inbox organizer with local LLM classification for axiOS/NixOS",
+      "tags": ["axios", "ai", "email"],
+      "diagramType": "C4Component"
     }
   ],
   "tagDefinitions": {

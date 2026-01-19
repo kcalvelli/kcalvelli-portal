@@ -29,6 +29,7 @@ Tools designed for the axiOS framework
 | Project | Description | Repository |
 |---------|-------------|------------|
 | [Axios Monitor](axios-monitor.md) | DMS plugin for monitoring and managing axiOS systems | [kcalvelli/axios-monitor](https://github.com/kcalvelli/axios-monitor) |
+| [axiOS AI Mail](axios-ai-mail.md) | AI-powered inbox organizer with local LLM classification | [kcalvelli/axios-ai-mail](https://github.com/kcalvelli/axios-ai-mail) |
 
 ## Commodore 64 Tools
 
