@@ -20,6 +20,8 @@ nav:
   - axiOS Ecosystem:
       - axiOS Monitor: axios-monitor.md
       - axiOS AI Mail: axios-ai-mail.md
+      - axiOS AI Chat: axios-ai-chat.md
+      - axiOS DAV: axios-dav.md
   - Commodore 64 Tools:
       - C64 Stream Viewer: c64-stream-viewer.md
       - Ultimate64 MCP: Ultimate64MCP.md
@@ -27,5 +29,12 @@ nav:
   - MCP Servers:
       - MCP Journal: mcp-journal.md
       - Nix Devshell MCP: nix-devshell-mcp.md
+      - MCP Gateway: mcp-gateway.md
   - Nix Packages:
       - Brave Previews: brave-browser-previews.md
+  - Documentation:
+      - Engineering Portal: kcalvelli-portal.md
+  - Tabletop Gaming:
+      - Peregrinatio RPG: peregrinatio-rpg.md
+  - Calendar Tools:
+      - Orthoterm: orthoterm.md

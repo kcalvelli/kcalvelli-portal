@@ -62,6 +62,48 @@
       "description": "AI-powered inbox organizer with local LLM classification for axiOS/NixOS",
       "tags": ["axios", "ai", "email"],
       "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/kcalvelli-portal",
+      "displayName": "Engineering Portal",
+      "description": "Auto-updating portfolio site with GitHub discovery and architectural documentation",
+      "tags": ["docs"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/axios-ai-chat",
+      "displayName": "axiOS AI Chat",
+      "description": "Family XMPP chat with AI assistant for the axios ecosystem",
+      "tags": ["axios", "ai"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/mcp-gateway",
+      "displayName": "MCP Gateway",
+      "description": "Universal MCP Gateway - Aggregates MCP servers with REST, MCP HTTP transport, and OAuth2 authentication",
+      "tags": ["mcp-server", "gateway"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/axios-dav",
+      "displayName": "axiOS DAV",
+      "description": "Declarative CalDAV/CardDAV sync for NixOS with MCP integration",
+      "tags": ["axios", "caldav"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/peregrinatio-rpg",
+      "displayName": "Peregrinatio RPG",
+      "description": "Tabletop RPG project",
+      "tags": ["rpg", "tabletop"],
+      "diagramType": "C4Component"
+    },
+    {
+      "repo": "kcalvelli/orthoterm",
+      "displayName": "Orthoterm",
+      "description": "Orthodox calendar terminal application",
+      "tags": ["calendar", "orthodox"],
+      "diagramType": "C4Component"
     }
   ],
   "tagDefinitions": {
@@ -119,6 +161,21 @@
       "displayName": "Documentation",
       "description": "Documentation and portfolio projects",
       "order": 11
+    },
+    "rpg": {
+      "displayName": "Tabletop Gaming",
+      "description": "Tabletop RPG and gaming projects",
+      "order": 12
+    },
+    "calendar": {
+      "displayName": "Calendar Tools",
+      "description": "Calendar and scheduling applications",
+      "order": 13
+    },
+    "orthodox": {
+      "displayName": "Orthodox Tools",
+      "description": "Orthodox Christian liturgical tools",
+      "order": 14
     }
   }
 }
