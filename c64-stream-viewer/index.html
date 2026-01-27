@@ -1,0 +1,1832 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../axios-dav/">
+      
+      
+        <link rel="next" href="../Ultimate64MCP/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>C64 Stream Viewer - Engineering Portal</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c64-stream-viewer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Engineering Portal" class="md-header__button md-logo" aria-label="Engineering Portal" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Engineering Portal
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C64 Stream Viewer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dashboard
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../axios/" class="md-tabs__link">
+          
+  
+  
+  System
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../axios-monitor/" class="md-tabs__link">
+          
+  
+  
+  axiOS Ecosystem
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Commodore 64 Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../mcp-journal/" class="md-tabs__link">
+          
+  
+  
+  MCP Servers
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../brave-browser-previews/" class="md-tabs__link">
+          
+  
+  
+  Nix Packages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../kcalvelli-portal/" class="md-tabs__link">
+          
+  
+  
+  Documentation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../peregrinatio-rpg/" class="md-tabs__link">
+          
+  
+  
+  Tabletop Gaming
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../orthoterm/" class="md-tabs__link">
+          
+  
+  
+  Calendar Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Engineering Portal" class="md-nav__button md-logo" aria-label="Engineering Portal" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Engineering Portal
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    System
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS Ecosystem
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    axiOS Ecosystem
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios-monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios-ai-mail/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS AI Mail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios-ai-chat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS AI Chat
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../axios-dav/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    axiOS DAV
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commodore 64 Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Commodore 64 Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C64 Stream Viewer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C64 Stream Viewer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onboarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onboarding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onboarding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-start-run-without-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start - Run Without Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nixos-system-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NixOS System Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-and-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage and Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Ultimate64MCP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ultimate64 MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c64term/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    C64 Terminal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Servers
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MCP Servers
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcp-journal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Journal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nix-devshell-mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nix Devshell MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mcp-gateway/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Gateway
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nix Packages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Nix Packages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../brave-browser-previews/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Brave Previews
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kcalvelli-portal/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Engineering Portal
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tabletop Gaming
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tabletop Gaming
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../peregrinatio-rpg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Peregrinatio RPG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Calendar Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orthoterm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orthoterm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onboarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onboarding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onboarding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-start-run-without-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick Start - Run Without Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nixos-system-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NixOS System Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-and-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage and Controls
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#technical-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Details
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Release History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c64-stream-viewer">C64 Stream Viewer</h1>
+<p><strong>Wayland-native viewer for Ultimate64 video/audio streaming with VIC-II color conversion</strong></p>
+<p><a href="https://github.com/kcalvelli/c64-stream-viewer">View on GitHub</a></p>
+<h2 id="overview">Overview</h2>
+<p>A Wayland-native video viewer for Ultimate64 video streaming that decodes the proprietary UDP packet format used by the Ultimate64 device. The application provides real-time video and audio playback with custom decoding for the 4-bit VIC-II color format.</p>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li><strong>Native Wayland Rendering:</strong> Uses SDL2/pygame with native Wayland support</li>
+<li><strong>Custom Packet Decoder:</strong> Decodes Ultimate64's proprietary 4-bit VIC-II color format</li>
+<li><strong>Real-time Performance:</strong> 14-17 FPS video display with ~4ms audio latency</li>
+<li><strong>Format Auto-detection:</strong> Supports both PAL (384×272) and NTSC (384×240) resolutions</li>
+<li><strong>Hardware-accelerated Scaling:</strong> Leverages SDL2 GPU scaling</li>
+<li><strong>Synchronized Audio:</strong> 16-bit stereo PCM at 47976 Hz with pygame mixer</li>
+<li><strong>Multiple Modes:</strong> Complete A/V viewer, video-only, headless statistics, and frame capture</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<p>The viewer operates as a multi-threaded UDP receiver that decodes proprietary streaming packets from Ultimate64 hardware, converts VIC-II palette data to RGB, and renders synchronized audio/video through Wayland. The architecture separates video and audio processing into independent pipelines.</p>
+<pre class="mermaid"><code>C4Component
+    title Component Diagram for C64 Stream Viewer
+
+    UpdateLayoutConfig($c4ShapeInRow="3")
+
+    Person(user, "C64 Enthusiast", "Viewing retro gaming or development")
+
+    Container_Boundary(viewer_app, "Viewer Application") {
+        Component(videoDecoder, "Video Decoder", "Python/NumPy", "Parses UDP packets, decodes 4-bit VIC-II palette to RGB")
+        Component(audioDecoder, "Audio Decoder", "Python", "Parses UDP packets, extracts 16-bit PCM samples")
+        Component(renderer, "Display Renderer", "Pygame/SDL2", "Renders frames to Wayland surface, handles scaling")
+    }
+
+    Container_Boundary(audio_playback, "Audio Subsystem") {
+        Component(audioMixer, "Audio Mixer", "Pygame Mixer", "Buffers and plays 47976 Hz stereo PCM")
+    }
+
+    Container_Boundary(network_layer, "Network Layer") {
+        Component(videoSocket, "Video Socket", "Python UDP Socket", "Receives on port 11000")
+        Component(audioSocket, "Audio Socket", "Python UDP Socket", "Receives on port 11001")
+    }
+
+    System_Ext(ultimate64, "Ultimate 64", "FPGA-based C64 Hardware")
+    System_Ext(waylandCompositor, "Wayland Compositor", "Niri/Sway/etc")
+
+    Rel(user, renderer, "Views stream, controls playback", "Keyboard: F=fullscreen, M=mute, ESC=quit")
+
+    Rel(ultimate64, videoSocket, "Streams video frames", "UDP port 11000, 780-byte packets")
+    Rel(ultimate64, audioSocket, "Streams audio samples", "UDP port 11001, 770-byte packets")
+
+    Rel(videoSocket, videoDecoder, "Forwards video packets", "780 bytes: 12-byte header + 768-byte payload")
+    Rel(audioSocket, audioDecoder, "Forwards audio packets", "770 bytes: 2-byte header + 768-byte payload")
+
+    Rel(videoDecoder, renderer, "Submits RGB frames", "384×272 PAL or 384×240 NTSC, NumPy array")
+    Rel(audioDecoder, audioMixer, "Submits PCM buffers", "192 stereo samples per packet")
+
+    Rel(renderer, waylandCompositor, "Renders surface", "SDL2 Wayland backend")
+    Rel(audioMixer, user, "Plays audio", "~4ms latency")
+
+    UpdateElementStyle(videoDecoder, $bgColor="#2196F3", $fontColor="#FFFFFF")
+    UpdateElementStyle(audioDecoder, $bgColor="#2196F3", $fontColor="#FFFFFF")
+    UpdateElementStyle(user, $bgColor="#4CAF50", $fontColor="#FFFFFF")</code></pre>
+<p><strong>Architectural Assumptions:</strong></p>
+<ul>
+<li><strong>Dual UDP Stream:</strong> Ultimate64 transmits two independent UDP streams (video on 11000, audio on 11001) that must be received and synchronized by the viewer</li>
+<li><strong>Proprietary Format:</strong> Video packets use a custom 12-byte header (seq, frame#, line#, dimensions, format) followed by 768 bytes of 4-bit indexed color data (4 lines × 384 pixels × 0.5 bytes)</li>
+<li><strong>VIC-II Palette Conversion:</strong> Each 4-bit value indexes into the classic Commodore 64 VIC-II 16-color palette, which is converted to RGB888 for modern displays</li>
+<li><strong>Multi-packet Frames:</strong> Single video frames span multiple UDP packets (272÷4 = 68 packets for PAL), requiring frame assembly logic with sequence tracking</li>
+<li><strong>Audio Interleaving:</strong> Audio payload contains 16-bit signed PCM samples in stereo interleaved format (LRLRLR...), 192 samples per packet = 768 bytes</li>
+<li><strong>Wayland-first Design:</strong> Explicitly sets SDL_VIDEODRIVER=wayland and uses pygame with SDL2 backend for native Wayland protocol support</li>
+<li><strong>Three Execution Modes:</strong> Complete A/V viewer (default), video-only (lightweight), headless (statistics/capture) - all sharing core decoder logic</li>
+</ul>
+<h2 id="onboarding">Onboarding</h2>
+<h3 id="quick-start-run-without-installation">Quick Start - Run Without Installation</h3>
+<p>Try the viewer directly without installing:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Complete A/V viewer (recommended)</span>
+nix<span class="w"> </span>run<span class="w"> </span>github:kcalvelli/c64-stream-viewer#av
+
+<span class="c1"># Video-only viewer (lightweight)</span>
+nix<span class="w"> </span>run<span class="w"> </span>github:kcalvelli/c64-stream-viewer#video
+
+<span class="c1"># Headless mode (statistics only)</span>
+nix<span class="w"> </span>run<span class="w"> </span>github:kcalvelli/c64-stream-viewer#headless
+</code></pre></div>
+<h3 id="nixos-system-installation">NixOS System Installation</h3>
+<p>Add as a flake input to your NixOS configuration. In your <code>flake.nix</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="ss">inputs</span> <span class="o">=</span> <span class="p">{</span>
+    nixpkgs<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:NixOS/nixpkgs/nixos-unstable&quot;</span><span class="p">;</span>
+    c64-stream-viewer<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:kcalvelli/c64-stream-viewer&quot;</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="ss">outputs</span> <span class="o">=</span> <span class="p">{</span> self<span class="p">,</span> nixpkgs<span class="p">,</span> c64-stream-viewer <span class="p">}:</span> <span class="p">{</span>
+    nixosConfigurations<span class="o">.</span><span class="ss">yourhostname</span> <span class="o">=</span> nixpkgs<span class="o">.</span>lib<span class="o">.</span>nixosSystem <span class="p">{</span>
+      <span class="ss">system</span> <span class="o">=</span> <span class="s2">&quot;x86_64-linux&quot;</span><span class="p">;</span>
+      <span class="ss">modules</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="l">./configuration.nix</span>
+        <span class="p">{</span>
+          environment<span class="o">.</span><span class="ss">systemPackages</span> <span class="o">=</span> <span class="p">[</span>
+            c64-stream-viewer<span class="o">.</span>packages<span class="o">.</span>x86_64-linux<span class="o">.</span>av
+            <span class="c1"># Optional: Add other variants</span>
+            <span class="c1"># c64-stream-viewer.packages.x86_64-linux.video</span>
+            <span class="c1"># c64-stream-viewer.packages.x86_64-linux.headless</span>
+          <span class="p">];</span>
+        <span class="p">}</span>
+      <span class="p">];</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then rebuild your system:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>nixos-rebuild<span class="w"> </span>switch<span class="w"> </span>--flake<span class="w"> </span>.#yourhostname
+</code></pre></div>
+<p>After installation, run from anywhere:</p>
+<div class="highlight"><pre><span></span><code>c64-stream-viewer-av
+</code></pre></div>
+<h3 id="development">Development</h3>
+<p><strong>Run from cloned repository:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/Projects/c64-stream-viewer
+nix<span class="w"> </span>run<span class="w"> </span>.#av<span class="w">            </span><span class="c1"># Complete A/V viewer</span>
+nix<span class="w"> </span>run<span class="w"> </span>.#video<span class="w">         </span><span class="c1"># Video only</span>
+nix<span class="w"> </span>run<span class="w"> </span>.#headless<span class="w">      </span><span class="c1"># Headless mode</span>
+</code></pre></div>
+<p><strong>Or enter development shell:</strong></p>
+<div class="highlight"><pre><span></span><code>nix<span class="w"> </span>develop
+python<span class="w"> </span>c64_stream_viewer_av.py
+</code></pre></div>
+<h3 id="usage-and-controls">Usage and Controls</h3>
+<p><strong>Complete A/V Viewer Controls:</strong></p>
+<ul>
+<li><code>ESC</code> or <code>Q</code> - Quit</li>
+<li><code>F</code> - Toggle fullscreen</li>
+<li><code>M</code> - Mute/unmute audio</li>
+</ul>
+<p><strong>Command-line Options:</strong></p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>c64_stream_viewer_av.py<span class="w"> </span>--help
+<span class="w">  </span>--video-port<span class="w"> </span>PORT<span class="w">    </span>Video<span class="w"> </span>UDP<span class="w"> </span>port<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span><span class="m">11000</span><span class="o">)</span>
+<span class="w">  </span>--audio-port<span class="w"> </span>PORT<span class="w">    </span>Audio<span class="w"> </span>UDP<span class="w"> </span>port<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span><span class="m">11001</span><span class="o">)</span>
+<span class="w">  </span>--scale<span class="w"> </span>N<span class="w">            </span>Display<span class="w"> </span>scale<span class="w"> </span>factor<span class="w"> </span><span class="o">(</span>default:<span class="w"> </span><span class="m">2</span><span class="o">)</span>
+<span class="w">  </span>--fullscreen<span class="w">         </span>Start<span class="w"> </span><span class="k">in</span><span class="w"> </span>fullscreen
+<span class="w">  </span>--no-audio<span class="w">           </span>Disable<span class="w"> </span>audio
+</code></pre></div>
+<p><strong>Frame Capture Mode:</strong></p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>c64_stream_viewer.py<span class="w"> </span>--save-frames<span class="w"> </span>/path/to/output
+</code></pre></div>
+<p>Saves frames as PNG files for later viewing or processing.</p>
+<h3 id="technical-details">Technical Details</h3>
+<p><strong>Video Format:</strong></p>
+<ul>
+<li><strong>Packet Size:</strong> 780 bytes</li>
+<li><strong>Header:</strong> 12 bytes (seq, frame#, line#, dimensions, format)</li>
+<li><strong>Payload:</strong> 768 bytes of 4-bit indexed color data</li>
+<li><strong>Format:</strong> 4 lines × 384 pixels × 0.5 bytes = 768 bytes</li>
+<li><strong>Color Palette:</strong> 16-color VIC-II palette (converted to RGB)</li>
+</ul>
+<p><strong>Audio Format:</strong></p>
+<ul>
+<li><strong>Packet Size:</strong> 770 bytes</li>
+<li><strong>Header:</strong> 2 bytes (sequence number)</li>
+<li><strong>Payload:</strong> 768 bytes = 192 stereo samples</li>
+<li><strong>Format:</strong> 16-bit signed PCM, stereo, interleaved</li>
+<li><strong>Sample Rate:</strong> 47976 Hz</li>
+<li><strong>Latency:</strong> ~4ms per packet</li>
+</ul>
+<h2 id="release-history">Release History</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Version</th>
+<th style="text-align: left;">Date</th>
+<th style="text-align: left;">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">v1.0.0</td>
+<td style="text-align: left;">2025-12-31</td>
+<td style="text-align: left;">✅ Latest</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
