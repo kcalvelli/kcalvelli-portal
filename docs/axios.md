@@ -118,7 +118,8 @@ For complete installation instructions, see the [Installation Guide](https://git
 
 | Version | Date | Status |
 |---------|------|--------|
-| v2025.12.11 | 2025-12-11 | ✅ Latest |
+| v2026.01.13 | 2026-01-13 | ✅ Latest |
+| v2025.12.11 | 2025-12-11 | |
 | v2025.12.04 | 2025-12-04 | |
 | v2025.11.21 | 2025-11-21 | |
 | v2025.11.19 | 2025-11-19 | |
@@ -127,7 +128,3 @@ For complete installation instructions, see the [Installation Guide](https://git
 | 2025-11-08.1 | 2025-11-08 | |
 | v2025.11.08 | 2025-11-08 | |
 | 2025-11-04 | 2025-11-04 | |
-| 2025.10.30 | 2025-10-30 | |
-| 2025-10-27 | 2025-10-27 | |
-| 2025.10.25 | N/A | |
-| 2025.10.25 | N/A | |
