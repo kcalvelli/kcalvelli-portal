@@ -99,6 +99,26 @@
       "displayName": "Development Tools",
       "description": "General development and tooling utilities",
       "order": 7
+    },
+    "caldav": {
+      "displayName": "CalDAV/CardDAV",
+      "description": "Calendar and contact synchronization tools",
+      "order": 8
+    },
+    "gateway": {
+      "displayName": "API Gateways",
+      "description": "API aggregation and proxy services",
+      "order": 9
+    },
+    "terminal": {
+      "displayName": "Terminal Tools",
+      "description": "Terminal emulators and CLI applications",
+      "order": 10
+    },
+    "docs": {
+      "displayName": "Documentation",
+      "description": "Documentation and portfolio projects",
+      "order": 11
     }
   }
 }

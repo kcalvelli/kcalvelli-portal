@@ -12,6 +12,37 @@ You are a Technical Documentation Architect. Your goal is to update the document
 
 ## Execution Steps
 
+### 0. Discovery Phase (Run First)
+
+Before processing existing projects, discover any new public repositories:
+
+1. **Scrape GitHub for all public repos:**
+   ```bash
+   gh repo list kcalvelli --visibility=public --json name,description --limit 100
+   ```
+
+2. **Compare against `projects.json`:**
+   - Extract the list of repo names currently in `projects.json`
+   - Identify repos returned by GitHub that are NOT in `projects.json`
+   - These are "new" repositories to be added
+
+3. **For each new repository:**
+   - Auto-classify using keyword patterns (see `openspec/AGENTS.md` for mapping)
+   - Present suggested tags to user via `AskUserQuestion`
+   - User confirms or modifies tags
+   - Add to `projects.json` with:
+     - `repo`: `kcalvelli/<name>`
+     - `displayName`: Title-cased (e.g., `mcp-gateway` → `MCP Gateway`)
+     - `description`: From GitHub API (or prompt user if empty)
+     - `tags`: Confirmed tag array (first tag is primary)
+     - `diagramType`: `C4Component` (default)
+
+4. **Add new tag definitions if needed:**
+   - If a new tag is used that's not in `tagDefinitions`, add it
+   - Assign appropriate `displayName`, `description`, and `order`
+
+5. **Skip discovery if user explicitly says "regenerate only"**
+
 ### 1. Preparation
 
 1. Read `projects.json` and parse the `projects` array and `tagDefinitions` object.
@@ -100,3 +131,21 @@ For each repo in the list:
          - MCP Journal: mcp-journal.md
      - Browser Tools:
          - Brave Previews: brave-browser-previews.md
+   ```
+
+2. **Verify all docs are linked** - Every project in `projects.json` should have a corresponding `.md` file and nav entry.
+
+### 4. Completion Summary
+
+After all steps complete, report to the user:
+
+```
+Portal update complete!
+- New projects added: X
+- Documentation pages updated: Y
+- Navigation sections: Z
+
+All projects are now documented and accessible via mkdocs.
+```
+
+If any errors occurred (failed fetches, missing data), list them at the end for user review.
