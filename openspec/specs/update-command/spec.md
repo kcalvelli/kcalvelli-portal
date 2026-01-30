@@ -38,6 +38,7 @@ The system SHALL execute a complete portal update following a defined sequence.
 3. User Confirmation (if any new repos)
 4. Project Registry Update (if confirmed)
 5. Documentation Regeneration (per OPS_MANUAL.md)
+5.5. Master Architecture Document Generation (ARCHITECTURE.md)
 6. Navigation Update
 7. Completion Summary
 
@@ -75,6 +76,12 @@ The system SHALL provide clear progress updates during the update workflow.
 **When** each project is processed
 **Then** the user sees progress (e.g., "Processing axios-dav... 3/14")
 
+#### Scenario: Master architecture doc progress
+**Given** documentation regeneration has completed
+**When** master document generation runs
+**Then** the user sees "Processing master architecture document..."
+**And** ARCHITECTURE.md is written to the repository root
+
 #### Scenario: Completion summary
 **Given** the workflow completes
 **When** all steps are finished
@@ -82,6 +89,7 @@ The system SHALL provide clear progress updates during the update workflow.
 - Number of new projects added
 - Number of documentation pages updated
 - Confirmation that mkdocs.yml was updated
+- Master architecture doc status (updated, with partial data count if applicable)
 
 ---
 

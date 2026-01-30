@@ -41,8 +41,11 @@ Add confirmed repositories to `projects.json` with:
 ### Step 4: Documentation Regeneration
 Execute full `OPS_MANUAL.md` workflow to regenerate all docs.
 
+### Step 4.5: Master Architecture Document
+Generate `ARCHITECTURE.md` at the repository root per OPS_MANUAL.md Phase 2.5. This is a single markdown file optimized for Claude Projects upload, containing the complete system architecture: project inventory, MCP server topology, integration patterns, technology decisions, dependency graph, and maintenance status. It is NOT added to `mkdocs.yml`.
+
 ### Step 5: Completion Summary
-Report: new projects added, pages updated, navigation refreshed.
+Report: new projects added, pages updated, navigation refreshed, master architecture doc status.
 
 ## Auto-Classification Keyword Mapping
 
