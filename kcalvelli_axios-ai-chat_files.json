@@ -1,9 +1,0 @@
-.gitignore
-CODE_OF_ETHICS.md
-README.md
-flake.lock
-flake.nix
-modules
-openspec
-pkgs
-tests

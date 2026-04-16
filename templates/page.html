@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
+{% block og_title %}{{ page.title }} — {{ config.title }}{% endblock %}
+{% block og_description %}{{ page.description | default(value=config.description) }}{% endblock %}
+
+{% block main %}
+<article class="project">
+  <nav class="breadcrumb">
+    <a href="{{ config.base_url | safe }}">Portfolio</a>
+    {% if page.ancestors | length > 1 %}
+      {% set parent = get_section(path=page.ancestors[1]) %}
+      / <a href="{{ parent.permalink | safe }}">{{ parent.title }}</a>
+    {% endif %}
+    / {{ page.title }}
+  </nav>
+
+  <header class="project-header">
+    <h1>{{ page.title }}</h1>
+    {% if page.extra.hook %}<p class="project-hook">{{ page.extra.hook }}</p>{% endif %}
+
+    <dl class="project-meta">
+      {% if page.extra.repo %}<dt>Repository</dt><dd><a href="https://github.com/{{ page.extra.repo }}">{{ page.extra.repo }}</a></dd>{% endif %}
+      {% if page.extra.language %}<dt>Language</dt><dd>{{ page.extra.language }}</dd>{% endif %}
+      {% if page.extra.status %}<dt>Status</dt><dd>{{ page.extra.status }}</dd>{% endif %}
+      {% if page.extra.stack %}<dt>Stack</dt><dd>{{ page.extra.stack }}</dd>{% endif %}
+    </dl>
+  </header>
+
+  <div class="project-body">
+    {{ page.content | safe }}
+  </div>
+</article>
+{% endblock %}

@@ -1,0 +1,8 @@
+# Zola build output
+public/
+
+# Structurizr/PlantUML intermediates (rendered SVGs live in static/diagrams/)
+diagrams/out/
+
+# Ephemeral GitHub API cache (fetched fresh by CI)
+.cache/

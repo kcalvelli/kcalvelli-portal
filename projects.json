@@ -1,181 +1,176 @@
 {
+  "$schema_note": "Draft schema — adds 'featured', 'status', 'highlight'; drops 'diagramType' (Structurizr DSL owns diagram decisions now).",
   "projects": [
     {
-      "repo": "kcalvelli/axios",
-      "displayName": "axiOS",
-      "description": "A modular NixOS distribution",
-      "tags": ["os", "nix"],
-      "diagramType": "C4Context"
+      "repo": "kcalvelli/cairn",
+      "displayName": "Cairn",
+      "description": "A modular NixOS distribution. The platform everything else runs on.",
+      "tags": ["platform", "nix"],
+      "featured": true,
+      "status": "released",
+      "highlight": "Declarative NixOS framework with 14 releases, running a 3-machine fleet daily."
     },
     {
-      "repo": "kcalvelli/axios-monitor",
-      "displayName": "axiOS Monitor",
-      "description": "DMS plugin for monitoring and managing axiOS systems",
-      "tags": ["axios", "monitoring", "fork"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/brave-browser-previews",
-      "displayName": "Brave Previews",
-      "description": "Nightly and Beta builds of Brave Browser with preview features",
-      "tags": ["pkgs", "browser"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/c64-stream-viewer",
-      "displayName": "C64 Stream Viewer",
-      "description": "Wayland-native viewer for Ultimate64 video/audio streaming",
-      "tags": ["commodore64", "wayland"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/Ultimate64MCP",
-      "displayName": "Ultimate64 MCP",
-      "description": "Flake to provide MCP server for Ultimate 64 series mainboards",
-      "tags": ["commodore64", "mcp-server"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/mcp-journal",
-      "displayName": "MCP Journal",
-      "description": "Journal management via Model Context Protocol",
-      "tags": ["mcp-server", "systemd"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/c64term",
-      "displayName": "C64 Terminal",
-      "description": "Terminal for Commodore 64",
-      "tags": ["commodore64", "terminal"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/nix-devshell-mcp",
-      "displayName": "Nix Devshell MCP",
-      "description": "Creation of Nix devshells via Model Context Protocol",
-      "tags": ["mcp-server", "nix", "development"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/axios-ai-mail",
-      "displayName": "axiOS AI Mail",
-      "description": "AI-powered inbox organizer with local LLM classification for axiOS/NixOS",
-      "tags": ["axios", "ai", "email"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/kcalvelli-portal",
-      "displayName": "Engineering Portal",
-      "description": "Auto-updating portfolio site with GitHub discovery and architectural documentation",
-      "tags": ["docs"],
-      "diagramType": "C4Component"
-    },
-    {
-      "repo": "kcalvelli/axios-ai-chat",
-      "displayName": "axiOS AI Chat",
-      "description": "Family XMPP chat with AI assistant for the axios ecosystem",
-      "tags": ["axios", "ai"],
-      "diagramType": "C4Component"
+      "repo": "kcalvelli/cairn-companion",
+      "displayName": "Cairn Companion",
+      "description": "A persistent, customizable persona wrapper around Claude Code. Part of the Cairn ecosystem, but Cairn is not required.",
+      "tags": ["ai", "agent"],
+      "featured": true,
+      "status": "active",
+      "highlight": "Personalized coding agent with file-based memory, per-user persona routing, and MCP tool integration. The agent that wrote this site."
     },
     {
       "repo": "kcalvelli/mcp-gateway",
       "displayName": "MCP Gateway",
-      "description": "Universal MCP Gateway - Aggregates MCP servers with REST, MCP HTTP transport, and OAuth2 authentication",
-      "tags": ["mcp-server", "gateway"],
-      "diagramType": "C4Component"
+      "description": "Universal MCP Gateway — aggregates MCP servers with REST, MCP HTTP transport, and OAuth2 authentication.",
+      "tags": ["mcp", "gateway"],
+      "featured": true,
+      "status": "active",
+      "highlight": "Proxies multiple MCP servers behind one authenticated HTTP endpoint. REST + native MCP + dynamic OpenAPI for Open WebUI."
     },
     {
-      "repo": "kcalvelli/axios-dav",
-      "displayName": "axiOS DAV",
-      "description": "Declarative CalDAV/CardDAV sync for NixOS with MCP integration",
-      "tags": ["axios", "caldav"],
-      "diagramType": "C4Component"
+      "repo": "kcalvelli/cairn-sentinel",
+      "displayName": "Cairn Sentinel",
+      "description": "Autonomous system operations and monitoring for NixOS hosts over Tailscale.",
+      "tags": ["ops", "fleet"],
+      "featured": true,
+      "status": "active",
+      "highlight": "Fleet-wide monitoring and remote ops for NixOS machines, glued together by Tailscale and exposed to AI agents via MCP."
     },
     {
-      "repo": "kcalvelli/peregrinatio-rpg",
-      "displayName": "Peregrinatio RPG",
-      "description": "Tabletop RPG project",
-      "tags": ["rpg", "tabletop"],
-      "diagramType": "C4Component"
+      "repo": "kcalvelli/cairn-monitor",
+      "displayName": "Cairn Monitor",
+      "description": "A DMS plugin for monitoring and managing Nix systems.",
+      "tags": ["platform", "desktop"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/cairn-mail",
+      "displayName": "Cairn Mail",
+      "description": "Self-hosted email with AI-powered classification using local LLMs.",
+      "tags": ["communication", "ai"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/cairn-dav",
+      "displayName": "Cairn DAV",
+      "description": "Declarative CalDAV/CardDAV sync for NixOS with MCP integration.",
+      "tags": ["communication", "mcp"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/cairn-chat",
+      "displayName": "Cairn Chat",
+      "description": "Multi-user XMPP chat with an AI assistant, for household Cairn deployments.",
+      "tags": ["communication", "ai"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/sid-assistant",
+      "displayName": "Sid Assistant",
+      "description": "Smart Intent Dispatcher — a local-first Home Assistant conversation agent for any OpenAI-compatible LLM.",
+      "tags": ["ai", "home-automation"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/Ultimate64MCP",
+      "displayName": "Ultimate64 MCP",
+      "description": "MCP server for the Ultimate 64 series mainboards and cartridges.",
+      "tags": ["retro", "mcp"],
+      "status": "active"
+    },
+    {
+      "repo": "kcalvelli/c64-stream-viewer",
+      "displayName": "C64 Stream Viewer",
+      "description": "Wayland-native viewer for Ultimate64 video/audio streaming. Decodes proprietary UDP packets with VIC-II color conversion.",
+      "tags": ["retro", "wayland"],
+      "status": "released"
+    },
+    {
+      "repo": "kcalvelli/c64term",
+      "displayName": "C64 Terminal",
+      "description": "Terminal emulator for the Commodore 64 aesthetic.",
+      "tags": ["retro", "terminal"],
+      "status": "early"
+    },
+    {
+      "repo": "kcalvelli/brave-browser-previews",
+      "displayName": "Brave Browser Previews",
+      "description": "Nightly and Beta builds of Brave Browser packaged as Nix flakes.",
+      "tags": ["packaging", "nix"],
+      "status": "maintenance"
+    },
+    {
+      "repo": "kcalvelli/nix-voice-assistant",
+      "displayName": "Nix Voice Assistant",
+      "description": "NixOS package and module for OHF-Voice/linux-voice-assistant.",
+      "tags": ["packaging", "home-automation"],
+      "status": "early"
     },
     {
       "repo": "kcalvelli/orthoterm",
       "displayName": "Orthoterm",
-      "description": "Orthodox calendar terminal application",
-      "tags": ["calendar", "orthodox"],
-      "diagramType": "C4Component"
+      "description": "Orthodox Christian liturgical calendar, in your terminal.",
+      "tags": ["orthodox", "cli"],
+      "status": "early"
+    },
+    {
+      "repo": "kcalvelli/dinerplacemat",
+      "displayName": "Diner Placemat",
+      "description": "Orthodox Christian business directory with a diner-placemat aesthetic.",
+      "tags": ["orthodox", "web"],
+      "status": "early"
+    },
+    {
+      "repo": "kcalvelli/peregrinatio-rpg",
+      "displayName": "Peregrinatio RPG",
+      "description": "A tabletop RPG project.",
+      "tags": ["content", "rpg"],
+      "status": "content"
+    },
+    {
+      "repo": "kcalvelli/kcalvelli-portal",
+      "displayName": "This Portal",
+      "description": "Auto-updating engineering portfolio with GitHub discovery, Structurizr diagrams, and AI-drafted prose.",
+      "tags": ["meta", "docs"],
+      "status": "active"
     }
   ],
-  "tagDefinitions": {
-    "os": {
-      "displayName": "System",
-      "description": "System Frameworks",
+  "categories": {
+    "featured": {
+      "displayName": "Featured",
+      "description": "The work I'd lead with.",
+      "order": 0
+    },
+    "platform": {
+      "displayName": "Platform & Infrastructure",
+      "description": "NixOS distribution, packaging, and desktop integration.",
       "order": 1
     },
-    "axios": {
-      "displayName": "axiOS Ecosystem",
-      "description": "Tools designed for the axiOS framework",
+    "ai": {
+      "displayName": "AI & MCP",
+      "description": "Agents, MCP servers, and tooling that bridges AI into real systems.",
       "order": 2
     },
-    "commodore64": {
-      "displayName": "Commodore 64 Tools",
-      "description": "Projects for Commodore 64 hardware and emulation",
+    "communication": {
+      "displayName": "Communication",
+      "description": "Email, calendar, contacts, chat — self-hosted.",
       "order": 3
     },
-    "mcp-server": {
-      "displayName": "MCP Servers",
-      "description": "Model Context Protocol server implementations",
+    "retro": {
+      "displayName": "Retro Computing",
+      "description": "Commodore 64 hardware bridged to modern Linux.",
       "order": 4
     },
-    "pkgs": {
-      "displayName": "Nix Packages",
-      "description": "Flakes to provide packages not included in nixpkgs",
+    "orthodox": {
+      "displayName": "Orthodox & Personal",
+      "description": "Liturgical tooling and personal projects.",
       "order": 5
     },
-    "nix": {
-      "displayName": "Nix Development",
-      "description": "Tools for Nix development and ecosystem",
+    "meta": {
+      "displayName": "Meta",
+      "description": "This site and other housekeeping.",
       "order": 6
-    },
-    "development": {
-      "displayName": "Development Tools",
-      "description": "General development and tooling utilities",
-      "order": 7
-    },
-    "caldav": {
-      "displayName": "CalDAV/CardDAV",
-      "description": "Calendar and contact synchronization tools",
-      "order": 8
-    },
-    "gateway": {
-      "displayName": "API Gateways",
-      "description": "API aggregation and proxy services",
-      "order": 9
-    },
-    "terminal": {
-      "displayName": "Terminal Tools",
-      "description": "Terminal emulators and CLI applications",
-      "order": 10
-    },
-    "docs": {
-      "displayName": "Documentation",
-      "description": "Documentation and portfolio projects",
-      "order": 11
-    },
-    "rpg": {
-      "displayName": "Tabletop Gaming",
-      "description": "Tabletop RPG and gaming projects",
-      "order": 12
-    },
-    "calendar": {
-      "displayName": "Calendar Tools",
-      "description": "Calendar and scheduling applications",
-      "order": 13
-    },
-    "orthodox": {
-      "displayName": "Orthodox Tools",
-      "description": "Orthodox Christian liturgical tools",
-      "order": 14
     }
   }
 }
