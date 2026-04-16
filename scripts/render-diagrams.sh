@@ -5,6 +5,13 @@
 
 set -euo pipefail
 
+# The Nix-packaged structurizr-cli bundles OpenJDK 21. Its launch script
+# honors $JAVA_HOME over $PATH, so if the environment has JAVA_HOME set
+# to an older JDK (which GitHub's ubuntu-latest runner does — JDK 17 by
+# default), the CLI fails with UnsupportedClassVersionError. Clear it
+# so the wrapper's PATH ordering wins.
+unset JAVA_HOME
+
 cd "$(dirname "$0")/.."
 
 DSL="diagrams/cairn.dsl"
