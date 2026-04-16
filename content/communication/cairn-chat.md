@@ -1,14 +1,21 @@
-# Cairn Chat
++++
+title = "Cairn Chat"
+description = "A Prosody XMPP server packaged as a NixOS module, scoped to a Tailscale tailnet."
+weight = 3
 
-A Prosody XMPP server packaged as a NixOS module, scoped to a Tailscale tailnet — never publicly exposed.
-
-**Repository:** [kcalvelli/cairn-chat](https://github.com/kcalvelli/cairn-chat) · **Language:** Nix (Prosody config) · **Transport:** XMPP over Tailscale
+[extra]
+hook = "A Prosody XMPP server packaged as a NixOS module, scoped to a Tailscale tailnet — never publicly exposed."
+repo = "kcalvelli/cairn-chat"
+language = "Nix"
+status = "active"
+stack = "Nix · Prosody · XMPP · Tailscale"
++++
 
 ## What it does
 
 Cairn Chat runs a Prosody XMPP server bound exclusively to the tailnet: no public DNS, no public ports, no account system outside the tailnet's device identity. Multi-user chat via MUC (XEP-0045), file sharing via HTTP File Upload (XEP-0363), message archive with offline delivery via MAM.
 
-Works with any XMPP client: Conversations on Android, Gajim, Dino on Linux, or an AI assistant connecting as a native XMPP client. The chat is also one of the channel adapters for [Cairn Companion](cairn-companion.md) — the agent can participate in the same MUCs as other users.
+Works with any XMPP client: Conversations on Android, Gajim, Dino on Linux, or an AI assistant connecting as a native XMPP client. The chat is also one of the channel adapters for [Cairn Companion](/ai/cairn-companion/) — the agent can participate in the same MUCs as other users.
 
 ## Why XMPP
 

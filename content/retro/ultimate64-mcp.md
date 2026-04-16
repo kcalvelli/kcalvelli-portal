@@ -1,8 +1,15 @@
-# Ultimate64 MCP
++++
+title = "Ultimate64 MCP"
+description = "A Model Context Protocol server that lets AI assistants control a real Commodore 64 through Ultimate64 hardware."
+weight = 1
 
-A Model Context Protocol server that lets AI assistants control a real Commodore 64 through the [Ultimate64](https://ultimate64.com/) hardware's REST API.
-
-**Repository:** [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP) · **Language:** Python · **Status:** Alpha
+[extra]
+hook = "A Model Context Protocol server that lets AI assistants control a real Commodore 64 through the Ultimate64 hardware's REST API."
+repo = "kcalvelli/Ultimate64MCP"
+language = "Python"
+status = "early"
+stack = "Python · MCP · Docker"
++++
 
 ## What it does
 

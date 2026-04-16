@@ -1,8 +1,17 @@
-# Cairn Companion
++++
+title = "Cairn Companion"
+description = "A persistent, customizable persona wrapper around Claude Code."
+weight = 1
 
-A persistent, customizable persona wrapper around [Claude Code](https://docs.claude.com/en/docs/claude-code). Turn your Claude subscription into an AI agent with identity, memory, and local agency on your Linux machines.
-
-**Repository:** [kcalvelli/cairn-companion](https://github.com/kcalvelli/cairn-companion) · **Language:** Rust
+[extra]
+hook = "A persistent, customizable persona wrapper around Claude Code — turn your Claude subscription into an AI agent with identity, memory, and local agency."
+repo = "kcalvelli/cairn-companion"
+language = "Rust"
+status = "active"
+stack = "Rust · Claude API · MCP"
+featured = true
+highlight = "Personalized coding agent with file-based memory, per-user persona routing, MCP tool integration. The agent that wrote this site."
++++
 
 Part of the Cairn ecosystem, but Cairn is not required. Ships as a home-manager module that works on any NixOS system with Claude Code installed.
 
@@ -18,7 +27,7 @@ It is explicitly **not** a new AI model, not a multi-tenant service, not a repla
 
 ## Architecture
 
-![Companion components](diagrams/companion-components.svg)
+![Companion components](/diagrams/companion-components.svg)
 
 ## Tiers
 

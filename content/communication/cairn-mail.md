@@ -1,8 +1,15 @@
-# Cairn Mail
++++
+title = "Cairn Mail"
+description = "Self-hosted email with AI-powered classification via local LLMs."
+weight = 1
 
-An AI-powered inbox organizer for NixOS. Self-hosted, declarative, with local LLM classification — no cloud AI dependencies.
-
-**Repository:** [kcalvelli/cairn-mail](https://github.com/kcalvelli/cairn-mail) · **Language:** Python · **AI runtime:** Ollama (local)
+[extra]
+hook = "An AI-powered inbox organizer for NixOS — self-hosted, declarative, with local LLM classification. No cloud AI dependencies."
+repo = "kcalvelli/cairn-mail"
+language = "Python"
+status = "active"
+stack = "Python · Ollama · Alembic"
++++
 
 ## What it does
 
@@ -12,7 +19,7 @@ On top of classification it ships a modern split-pane web UI with threading, bul
 
 ## Action Tags
 
-Tag a message with a special action and an MCP tool fires: **add contact** pulls the sender into the address book, **create reminder** turns mentioned dates into calendar events. Custom actions can invoke any MCP tool. Requires [Cairn DAV](cairn-dav.md) and [MCP Gateway](mcp-gateway.md) to be present.
+Tag a message with a special action and an MCP tool fires: **add contact** pulls the sender into the address book, **create reminder** turns mentioned dates into calendar events. Custom actions can invoke any MCP tool. Requires [Cairn DAV](/communication/cairn-dav/) and [MCP Gateway](/ai/mcp-gateway/) to be present.
 
 ## Run it
 

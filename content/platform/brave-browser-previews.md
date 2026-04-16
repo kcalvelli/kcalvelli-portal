@@ -1,8 +1,15 @@
-# Brave Browser Previews
++++
+title = "Brave Browser Previews"
+description = "Nightly and Beta builds of Brave Browser packaged as Nix flakes, auto-updated daily."
+weight = 3
 
-A Nix flake providing the latest Nightly and Beta builds of Brave Browser for `x86_64-linux`, auto-updated daily from Brave's GitHub releases.
-
-**Repository:** [kcalvelli/brave-browser-previews](https://github.com/kcalvelli/brave-browser-previews) · **Language:** Nix
+[extra]
+hook = "A Nix flake providing the latest Nightly and Beta builds of Brave Browser for x86_64-linux, auto-updated daily from Brave's GitHub releases."
+repo = "kcalvelli/brave-browser-previews"
+language = "Nix"
+status = "maintenance"
+stack = "Nix · GitHub Actions"
++++
 
 ## What it does
 

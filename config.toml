@@ -1,0 +1,51 @@
+base_url = "https://kcalvelli.github.io/kcalvelli-portal"
+title = "Keith Calvelli"
+description = "Engineering portfolio — NixOS, AI infrastructure, retro computing"
+default_language = "en"
+
+compile_sass = true
+build_search_index = false
+generate_feeds = false
+
+# Use kcalvelli-portal/ as URL prefix because the site is served from a project page
+# When you move to a custom domain, set base_url to the apex and remove the prefix everywhere.
+
+[markdown]
+smart_punctuation = true
+bottom_footnotes = true
+
+[extra]
+author = "Keith Calvelli"
+github = "kcalvelli"
+location = "North Carolina"
+
+# Category metadata mirrors projects.json — used by index template to group non-featured work
+[[extra.categories]]
+slug = "platform"
+name = "Platform & Infrastructure"
+description = "NixOS distribution, packaging, and desktop integration."
+
+[[extra.categories]]
+slug = "ai"
+name = "AI & MCP"
+description = "Agents, MCP servers, and tooling that bridges AI into real systems."
+
+[[extra.categories]]
+slug = "communication"
+name = "Communication"
+description = "Email, calendar, contacts, chat — self-hosted."
+
+[[extra.categories]]
+slug = "retro"
+name = "Retro Computing"
+description = "Commodore 64 hardware bridged to modern Linux."
+
+[[extra.categories]]
+slug = "orthodox"
+name = "Orthodox & Personal"
+description = "Liturgical tooling and personal projects."
+
+[[extra.categories]]
+slug = "meta"
+name = "Meta"
+description = "This site and other housekeeping."

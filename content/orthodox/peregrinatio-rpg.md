@@ -1,8 +1,15 @@
-# Peregrinatio RPG
++++
+title = "Peregrinatio RPG"
+description = "A tabletop roleplaying game of exile and pilgrimage, set in AD 870."
+weight = 3
 
-A tabletop roleplaying game of exile and pilgrimage, set in AD 870.
-
-**Repository:** [kcalvelli/peregrinatio-rpg](https://github.com/kcalvelli/peregrinatio-rpg) · **Format:** Markdown codex
+[extra]
+hook = "A tabletop roleplaying game of exile and pilgrimage, set in AD 870."
+repo = "kcalvelli/peregrinatio-rpg"
+language = "Markdown"
+status = "early"
+stack = "Markdown codex"
++++
 
 ## What it is
 

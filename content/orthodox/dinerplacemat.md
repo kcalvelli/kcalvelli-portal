@@ -1,8 +1,15 @@
-# Diner Placemat
++++
+title = "Diner Placemat"
+description = "A nostalgic, diner-placemat-style business directory for the Orthodox Christian community."
+weight = 2
 
-A nostalgic, diner-placemat-style business directory for the Orthodox Christian community.
-
-**Repository:** [kcalvelli/dinerplacemat](https://github.com/kcalvelli/dinerplacemat) · **Language:** JavaScript · **Deploy:** Cloudflare Pages + D1 + R2
+[extra]
+hook = "A nostalgic, diner-placemat-style business directory for the Orthodox Christian community."
+repo = "kcalvelli/dinerplacemat"
+language = "JavaScript"
+status = "early"
+stack = "Cloudflare Pages · D1 · R2 · vanilla JS"
++++
 
 ## What it does
 

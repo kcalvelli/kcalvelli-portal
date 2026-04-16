@@ -1,8 +1,15 @@
-# Cairn DAV
++++
+title = "Cairn DAV"
+description = "Declarative CalDAV/CardDAV sync for NixOS with MCP integration."
+weight = 2
 
-Declarative CalDAV/CardDAV synchronization for NixOS with MCP integration — calendars, contacts, and AI read/write access in one module.
-
-**Repository:** [kcalvelli/cairn-dav](https://github.com/kcalvelli/cairn-dav) · **Language:** Python · **Backends:** vdirsyncer, khal, khard
+[extra]
+hook = "Declarative CalDAV/CardDAV synchronization for NixOS with MCP integration — calendars, contacts, and AI read/write access in one module."
+repo = "kcalvelli/cairn-dav"
+language = "Python"
+status = "active"
+stack = "Python · vdirsyncer · khal · khard · MCP"
++++
 
 ## What it does
 
@@ -12,7 +19,7 @@ Cairn DAV gives NixOS first-class, declarative calendar and contact sync. Everyt
 - **CalDAV/CardDAV** — any standard provider (Fastmail, Nextcloud, iCloud)
 - **HTTP/ICS subscriptions** — read-only feeds for holidays, sports, liturgical calendars
 
-On top of the sync layer sits an **MCP server**: AI agents can read events, create new ones, and search contacts. That's the seam where [Cairn Mail](cairn-mail.md)'s "create reminder from this email" action tag actually fires.
+On top of the sync layer sits an **MCP server**: AI agents can read events, create new ones, and search contacts. That's the seam where [Cairn Mail](/communication/cairn-mail/)'s "create reminder from this email" action tag actually fires.
 
 Works standalone or as part of the Cairn ecosystem.
 

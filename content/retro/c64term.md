@@ -1,8 +1,15 @@
-# C64 Terminal
++++
+title = "C64 Terminal"
+description = "A Commodore 64 aesthetic wrapper for Ghostty + Fish."
+weight = 3
 
-A Commodore 64 aesthetic wrapper for Ghostty + Fish — full PETSCII palette, blinking block cursor, authentic boot screen.
-
-**Repository:** [kcalvelli/c64term](https://github.com/kcalvelli/c64term) · **Language:** Nix · **Requires:** Ghostty, Fish
+[extra]
+hook = "A Commodore 64 aesthetic wrapper for Ghostty + Fish — full PETSCII palette, blinking block cursor, authentic boot screen."
+repo = "kcalvelli/c64term"
+language = "Nix"
+status = "early"
+stack = "Nix · Ghostty · Fish"
++++
 
 ## What it does
 

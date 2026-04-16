@@ -1,8 +1,15 @@
-# Orthoterm
++++
+title = "Orthoterm"
+description = "A command-line tool for fetching Orthodox Christian calendar data and generating iCal files."
+weight = 1
 
-A command-line tool for fetching Orthodox Christian calendar data and generating iCal files.
-
-**Repository:** [kcalvelli/orthoterm](https://github.com/kcalvelli/orthoterm) · **Language:** Rust
+[extra]
+hook = "A command-line tool for fetching Orthodox Christian calendar data and generating iCal files."
+repo = "kcalvelli/orthoterm"
+language = "Rust"
+status = "early"
+stack = "Rust"
++++
 
 ## What it does
 

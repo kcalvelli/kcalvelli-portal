@@ -1,8 +1,15 @@
-# Cairn Monitor
++++
+title = "Cairn Monitor"
+description = "DankMaterialShell plugin for monitoring Cairn systems, with integrated rebuild and update tracking."
+weight = 2
 
-A [DankMaterialShell](https://danklinux.com/) plugin for monitoring Cairn systems with integrated rebuild and update-tracking capabilities.
-
-**Repository:** [kcalvelli/cairn-monitor](https://github.com/kcalvelli/cairn-monitor) · **Language:** QML · **Fork of:** [antonjah/nix-monitor](https://github.com/antonjah/nix-monitor)
+[extra]
+hook = "A DMS plugin for monitoring Cairn systems, with integrated rebuild and update-tracking capabilities."
+repo = "kcalvelli/cairn-monitor"
+language = "QML"
+status = "active"
+stack = "QML · KDE · DankMaterialShell"
++++
 
 ## What it does
 

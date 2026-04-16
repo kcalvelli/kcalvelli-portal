@@ -1,8 +1,17 @@
-# Cairn
++++
+title = "Cairn"
+description = "A modular NixOS distribution — the platform everything else runs on."
+weight = 1
 
-A modular NixOS framework and library for building reproducible systems with Home Manager, modern desktop environments, and curated development tools.
-
-**Repository:** [kcalvelli/cairn](https://github.com/kcalvelli/cairn) · **Language:** Nix · **Latest release:** v2026.01.13
+[extra]
+hook = "A modular NixOS framework for building reproducible systems with Home Manager, modern desktops, and curated development tools."
+repo = "kcalvelli/cairn"
+language = "Nix"
+status = "released"
+stack = "Nix · NixOS · home-manager"
+featured = true
+highlight = "Declarative NixOS framework with 14 releases, running a multi-machine fleet daily."
++++
 
 ## What it does
 
@@ -12,7 +21,7 @@ It ships **per-user home profiles** so the same system can host a power-user til
 
 ## Architecture
 
-Cairn's place in the broader ecosystem is shown in the [Cairn Containers view](diagrams/cairn-containers.svg). It's the platform other Cairn-prefixed projects (Monitor, Mail, DAV, Chat, Companion, Gateway, Sentinel) extend via NixOS and home-manager modules.
+Cairn's place in the broader ecosystem is shown in the [Cairn Containers view](/diagrams/cairn-containers.svg). It's the platform other Cairn-prefixed projects (Monitor, Mail, DAV, Chat, Companion, Gateway, Sentinel) extend via NixOS and home-manager modules.
 
 ## Run it
 

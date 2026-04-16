@@ -1,8 +1,17 @@
-# MCP Gateway
++++
+title = "MCP Gateway"
+description = "Universal MCP Gateway — aggregates multiple MCP servers behind a single HTTP interface."
+weight = 2
 
-Universal MCP Gateway — aggregates multiple Model Context Protocol servers behind a single HTTP interface.
-
-**Repository:** [kcalvelli/mcp-gateway](https://github.com/kcalvelli/mcp-gateway) · **Language:** Python (FastAPI)
+[extra]
+hook = "Universal MCP Gateway — aggregates multiple Model Context Protocol servers behind a single HTTP interface."
+repo = "kcalvelli/mcp-gateway"
+language = "Python"
+status = "active"
+stack = "Python · FastAPI · OAuth2 · MCP"
+featured = true
+highlight = "Proxies multiple MCP servers behind one Tailscale-gated HTTP endpoint. REST + native MCP + dynamic OpenAPI for Open WebUI."
++++
 
 ## What it does
 
@@ -22,7 +31,7 @@ No application-level authentication. Network security is provided by **Tailscale
 
 ## Architecture
 
-See the [Gateway Components view](diagrams/gateway-components.svg) for the internal structure, and the [Cairn Containers view](diagrams/cairn-containers.svg) for how Gateway sits between clients (Companion, Open WebUI, Claude) and the proxied servers (Mail, DAV, Sentinel, Ultimate64 MCP, etc.).
+See the [Gateway Components view](/diagrams/gateway-components.svg) for internals, and the [Cairn Containers view](/diagrams/cairn-containers.svg) for how Gateway sits between clients (Companion, Open WebUI, Claude) and proxied servers (Mail, DAV, Sentinel, Ultimate64 MCP, etc.).
 
 ## Run it
 

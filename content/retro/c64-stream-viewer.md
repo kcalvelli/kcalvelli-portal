@@ -1,8 +1,15 @@
-# C64 Stream Viewer
++++
+title = "C64 Stream Viewer"
+description = "A Wayland-native video viewer for Ultimate64 streaming."
+weight = 2
 
-A Wayland-native video viewer for Ultimate64 streaming. Decodes the proprietary UDP packet format the hardware uses for A/V output.
-
-**Repository:** [kcalvelli/c64-stream-viewer](https://github.com/kcalvelli/c64-stream-viewer) · **Language:** Python · **Latest release:** v1.0.0
+[extra]
+hook = "A Wayland-native video viewer for Ultimate64 streaming. Decodes the proprietary UDP packet format the hardware uses for A/V output."
+repo = "kcalvelli/c64-stream-viewer"
+language = "Python"
+status = "released"
+stack = "Python · SDL2 · pygame · Wayland"
++++
 
 ## What it does
 

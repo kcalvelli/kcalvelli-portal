@@ -1,5 +1,5 @@
 {
-  description = "kcalvelli-portal — engineering portfolio (MkDocs + Structurizr)";
+  description = "kcalvelli-portal — engineering portfolio (Zola + Structurizr)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -16,9 +16,7 @@
 
           packages = with pkgs; [
             # Site
-            mkdocs
-            python3Packages.mkdocs-material
-            python3Packages.pymdown-extensions
+            zola
 
             # Diagrams: Structurizr DSL → C4-PlantUML → SVG
             structurizr-cli
@@ -31,8 +29,8 @@
 
           shellHook = ''
             echo "kcalvelli-portal devshell"
-            echo "  mkdocs serve              → live preview"
-            echo "  mkdocs build --strict     → build check"
+            echo "  zola serve                → live preview"
+            echo "  zola build                → static site → public/"
             echo "  ./scripts/render-diagrams.sh → re-render SVGs from diagrams/cairn.dsl"
           '';
         };

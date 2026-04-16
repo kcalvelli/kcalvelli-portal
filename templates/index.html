@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block main %}
+<section class="hero">
+  <h1>{{ section.title }}</h1>
+  <div class="hero-body">
+    {{ section.content | safe }}
+  </div>
+</section>
+
+{% if section.extra.featured %}
+<section class="featured">
+  <h2>Featured</h2>
+  <div class="card-grid">
+    {% for path in section.extra.featured %}
+      {% set proj = get_page(path=path ~ ".md") %}
+      <a href="{{ proj.permalink | safe }}" class="card card-featured">
+        <h3>{{ proj.title }}</h3>
+        <p class="card-hook">{{ proj.extra.hook }}</p>
+        <p class="card-highlight">{{ proj.extra.highlight }}</p>
+        <p class="card-stack">{{ proj.extra.stack }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if section.extra.ecosystem_diagram %}
+<section class="ecosystem">
+  <h2>The Cairn Ecosystem</h2>
+  <p>A system-of-systems view. Cairn is the platform; the rest of the work fans out from it or plugs into it.</p>
+  <img src="{{ get_url(path=section.extra.ecosystem_diagram) | safe }}" alt="Cairn ecosystem diagram" class="ecosystem-diagram">
+  <p class="ecosystem-source">Rendered from <a href="https://github.com/kcalvelli/kcalvelli-portal/blob/main/diagrams/cairn.dsl"><code>diagrams/cairn.dsl</code></a> — one Structurizr workspace, six views.</p>
+</section>
+{% endif %}
+
+<section class="more-work">
+  <h2>More Work</h2>
+  {% for cat in config.extra.categories %}
+    {% set cat_section = get_section(path=cat.slug ~ "/_index.md") %}
+    {% if cat_section.pages %}
+    <div class="category">
+      <h3><a href="{{ cat_section.permalink | safe }}">{{ cat.name }}</a></h3>
+      <p class="category-description">{{ cat.description }}</p>
+      <ul class="project-list">
+        {% for proj in cat_section.pages %}
+        <li>
+          <a href="{{ proj.permalink | safe }}"><strong>{{ proj.title }}</strong></a>
+          — {{ proj.description }}
+          {% if proj.extra.status and proj.extra.status != "active" %}
+          <span class="status status-{{ proj.extra.status }}">{{ proj.extra.status }}</span>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  {% endfor %}
+</section>
+{% endblock %}

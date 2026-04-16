@@ -9,7 +9,7 @@ cd "$(dirname "$0")/.."
 
 DSL="diagrams/cairn.dsl"
 TMP="diagrams/out"
-DEST="docs/diagrams"
+DEST="static/diagrams"
 
 rm -rf "$TMP"
 mkdir -p "$TMP" "$DEST"

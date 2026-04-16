@@ -1,8 +1,17 @@
-# Cairn Sentinel
++++
+title = "Cairn Sentinel"
+description = "Autonomous system operations and monitoring for NixOS hosts over Tailscale."
+weight = 3
 
-Autonomous system operations and monitoring for NixOS hosts over Tailscale.
-
-**Repository:** [kcalvelli/cairn-sentinel](https://github.com/kcalvelli/cairn-sentinel) · **Language:** Rust
+[extra]
+hook = "Autonomous system operations and monitoring for NixOS hosts over Tailscale."
+repo = "kcalvelli/cairn-sentinel"
+language = "Rust"
+status = "active"
+stack = "Rust · Tailscale · MCP"
+featured = true
+highlight = "Fleet-wide monitoring and remote ops for NixOS machines, glued together by Tailscale and exposed to AI agents via MCP."
++++
 
 ## What it does
 
@@ -14,13 +23,13 @@ The problem it solves: operating a multi-machine Linux fleet without a heavyweig
 
 - **Read-side:** `list_hosts`, `query_host`, `host_disk`, `host_gpu`, `host_temperatures`, `system_status`, `view_logs`, `check_fleet_health`
 - **Write-side:** `restart_service`, `reboot_host`
-- **Transport:** MCP over HTTP, routed through [MCP Gateway](mcp-gateway.md) for authenticated remote access
+- **Transport:** MCP over HTTP, routed through [MCP Gateway](/ai/mcp-gateway/) for authenticated remote access
 
 ## Architecture
 
 Sentinel runs as a user-level service on a designated fleet-ops host. It discovers peers via Tailscale, queries each host's systemd journal and telemetry over the Tailnet, and aggregates results. Agents call Sentinel tools via MCP Gateway, which proxies to Sentinel's MCP endpoint.
 
-See the [deployment view](diagrams/cairn-deployment.svg) for how Sentinel sits in the fleet.
+See the [deployment view](/diagrams/cairn-deployment.svg) for how Sentinel sits in a reference fleet topology.
 
 ## Run it
 

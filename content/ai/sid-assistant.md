@@ -1,8 +1,15 @@
-# Sid Assistant
++++
+title = "Sid Assistant"
+description = "Smart Intent Dispatcher — a local-first Home Assistant conversation agent that makes voice control fast for device commands and smart for everything else."
+weight = 4
 
-Smart Intent Dispatcher — a local-first Home Assistant conversation agent that makes voice control **fast for device commands** and **smart for everything else**.
-
-**Repository:** [kcalvelli/sid-assistant](https://github.com/kcalvelli/sid-assistant) · **Language:** Python (HA custom integration)
+[extra]
+hook = "Smart Intent Dispatcher — a local-first Home Assistant conversation agent. Fast for device commands, smart for everything else."
+repo = "kcalvelli/sid-assistant"
+language = "Python"
+status = "active"
+stack = "Python · Home Assistant · OpenAI-compatible"
++++
 
 ## What it does
 
