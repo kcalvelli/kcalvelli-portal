@@ -1,40 +1,58 @@
-site_name: Engineering Portal
+site_name: Keith Calvelli
+site_description: Engineering portfolio — NixOS, AI infrastructure, retro computing
+site_url: https://kcalvelli.github.io/kcalvelli-portal/
+
 theme:
   name: material
   palette:
-    scheme: slate
-    primary: teal
+    - scheme: slate
+      primary: teal
+      accent: teal
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
     - content.code.copy
+    - toc.follow
+
 markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
 nav:
-  - Dashboard: index.md
-  - System:
-      - axiOS: axios.md
-  - axiOS Ecosystem:
-      - axiOS Monitor: axios-monitor.md
-      - axiOS AI Mail: axios-ai-mail.md
-      - axiOS AI Chat: axios-ai-chat.md
-      - axiOS DAV: axios-dav.md
-  - Commodore 64 Tools:
-      - C64 Stream Viewer: c64-stream-viewer.md
-      - Ultimate64 MCP: Ultimate64MCP.md
-      - C64 Terminal: c64term.md
-  - MCP Servers:
-      - MCP Journal: mcp-journal.md
-      - Nix Devshell MCP: nix-devshell-mcp.md
+  - Portfolio: index.md
+  - Featured:
+      - Cairn: cairn.md
+      - Cairn Companion: cairn-companion.md
       - MCP Gateway: mcp-gateway.md
-  - Nix Packages:
-      - Brave Previews: brave-browser-previews.md
-  - Documentation:
-      - Engineering Portal: kcalvelli-portal.md
-  - Tabletop Gaming:
-      - Peregrinatio RPG: peregrinatio-rpg.md
-  - Calendar Tools:
+      - Cairn Sentinel: cairn-sentinel.md
+  - Platform & Infrastructure:
+      - Cairn Monitor: cairn-monitor.md
+      - Brave Browser Previews: brave-browser-previews.md
+      - Nix Voice Assistant: nix-voice-assistant.md
+  - AI & MCP:
+      - Sid Assistant: sid-assistant.md
+  - Communication:
+      - Cairn Mail: cairn-mail.md
+      - Cairn DAV: cairn-dav.md
+      - Cairn Chat: cairn-chat.md
+  - Retro Computing:
+      - Ultimate64 MCP: Ultimate64MCP.md
+      - C64 Stream Viewer: c64-stream-viewer.md
+      - C64 Terminal: c64term.md
+  - Orthodox & Personal:
       - Orthoterm: orthoterm.md
+      - Diner Placemat: dinerplacemat.md
+      - Peregrinatio RPG: peregrinatio-rpg.md
+  - Meta:
+      - This Portal: kcalvelli-portal.md

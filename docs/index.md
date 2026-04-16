@@ -1,86 +1,87 @@
-# Keith Calvelli's Project Portfolio
+# Keith Calvelli
 
-Welcome! I'm Keith Calvelli, a software engineering manager passionate about building elegant systems and tools. I'm an Orthodox Christian, father of three, and based in North Carolina.
+I build opinionated, self-hosted infrastructure. A NixOS distribution that runs a multi-machine fleet. MCP servers that bridge AI into real systems. A customizable coding agent that runs as a daily driver, not a demo. Everything open source, everything declarative, everything in production — not a lab.
 
-## About My Work
-
-My projects span several areas of interest:
-
-- **System Architecture** - Building modular, declarative systems with NixOS
-- **Retro Computing** - Bridging vintage Commodore 64 hardware with modern Linux workflows
-- **Developer Tools** - Creating MCP servers and automation tools for AI-powered development
-
-This portfolio showcases my open-source work, from the axiOS framework to specialized tools for retro computing enthusiasts and developers.
+Based in McAdenville, NC. Reachable on [GitHub](https://github.com/kcalvelli).
 
 ---
 
-## System
+## Featured
 
-System Frameworks
+### [Cairn](cairn.md) — a modular NixOS distribution
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [axiOS](axios.md) | A modular NixOS distribution | [kcalvelli/axios](https://github.com/kcalvelli/axios) |
+The platform everything else runs on. Declarative system configuration via Nix flakes, with desktop, development, and service modules composable into any host. 14 releases, actively deployed on three machines.
 
-## axiOS Ecosystem
+**Nix · NixOS · home-manager**
 
-Tools designed for the axiOS framework
+### [Cairn Companion](cairn-companion.md) — a coding agent with continuity
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [axiOS Monitor](axios-monitor.md) | DMS plugin for monitoring and managing axiOS systems | [kcalvelli/axios-monitor](https://github.com/kcalvelli/axios-monitor) |
-| [axiOS AI Mail](axios-ai-mail.md) | AI-powered inbox organizer with local LLM classification for axiOS/NixOS | [kcalvelli/axios-ai-mail](https://github.com/kcalvelli/axios-ai-mail) |
-| [axiOS AI Chat](axios-ai-chat.md) | Family XMPP chat with AI assistant for the axios ecosystem | [kcalvelli/axios-ai-chat](https://github.com/kcalvelli/axios-ai-chat) |
-| [axiOS DAV](axios-dav.md) | Declarative CalDAV/CardDAV sync for NixOS with MCP integration | [kcalvelli/axios-dav](https://github.com/kcalvelli/axios-dav) |
+A persistent, customizable persona wrapper around Claude Code. Named personas, file-based memory that survives between sessions, per-user conversation routing, MCP tool integration. Used every day. Wrote this site.
 
-## Commodore 64 Tools
+**Rust · Claude API · MCP**
 
-Projects for Commodore 64 hardware and emulation
+### [MCP Gateway](mcp-gateway.md) — one door, many tools
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [C64 Stream Viewer](c64-stream-viewer.md) | Wayland-native viewer for Ultimate64 video/audio streaming | [kcalvelli/c64-stream-viewer](https://github.com/kcalvelli/c64-stream-viewer) |
-| [Ultimate64 MCP](Ultimate64MCP.md) | Flake to provide MCP server for Ultimate 64 series mainboards | [kcalvelli/Ultimate64MCP](https://github.com/kcalvelli/Ultimate64MCP) |
-| [C64 Terminal](c64term.md) | Terminal for Commodore 64 | [kcalvelli/c64term](https://github.com/kcalvelli/c64term) |
+Aggregates MCP servers behind a single authenticated HTTP endpoint. Native MCP transport, REST API, dynamic OpenAPI for Open WebUI, OAuth2 for remote clients. The seam where AI meets infrastructure.
 
-## MCP Servers
+**Python · FastAPI · OAuth2 · MCP**
 
-Model Context Protocol server implementations
+### [Cairn Sentinel](cairn-sentinel.md) — fleet ops over Tailscale
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [MCP Journal](mcp-journal.md) | Journal management via Model Context Protocol | [kcalvelli/mcp-journal](https://github.com/kcalvelli/mcp-journal) |
-| [Nix Devshell MCP](nix-devshell-mcp.md) | Creation of Nix devshells via Model Context Protocol | [kcalvelli/nix-devshell-mcp](https://github.com/kcalvelli/nix-devshell-mcp) |
-| [MCP Gateway](mcp-gateway.md) | Universal MCP Gateway - Aggregates MCP servers with REST, MCP HTTP transport, and OAuth2 authentication | [kcalvelli/mcp-gateway](https://github.com/kcalvelli/mcp-gateway) |
+Autonomous monitoring and remote operations for the NixOS fleet. Service health, host telemetry, remote restarts — exposed to AI agents through MCP, routed over a Tailnet.
 
-## Nix Packages
+**Rust · Tailscale · MCP**
 
-Flakes to provide packages not included in nixpkgs
+---
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [Brave Previews](brave-browser-previews.md) | Nightly and Beta builds of Brave Browser with preview features | [kcalvelli/brave-browser-previews](https://github.com/kcalvelli/brave-browser-previews) |
+## The Cairn Ecosystem
 
-## Documentation
+Cairn is a galaxy of services that compose into a full platform. This diagram shows what runs where and how the pieces talk.
 
-Documentation and portfolio projects
+![Cairn ecosystem](diagrams/cairn-landscape.svg)
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [Engineering Portal](kcalvelli-portal.md) | Auto-updating portfolio site with GitHub discovery and architectural documentation | [kcalvelli/kcalvelli-portal](https://github.com/kcalvelli/kcalvelli-portal) |
+Source: [`diagrams/cairn.dsl`](https://github.com/kcalvelli/kcalvelli-portal/blob/main/diagrams/cairn.dsl) (Structurizr workspace — one model, many views)
 
-## Tabletop Gaming
+---
 
-Tabletop RPG and gaming projects
+## More Work
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [Peregrinatio RPG](peregrinatio-rpg.md) | Tabletop RPG project | [kcalvelli/peregrinatio-rpg](https://github.com/kcalvelli/peregrinatio-rpg) |
+### Platform & Infrastructure
 
-## Calendar Tools
+- **[Cairn Monitor](cairn-monitor.md)** — desktop widget for system status, built as a DMS plugin.
+- **[Brave Browser Previews](brave-browser-previews.md)** — Nightly and Beta builds of Brave packaged as Nix flakes.
+- **[Nix Voice Assistant](nix-voice-assistant.md)** — NixOS package and module for OHF-Voice/linux-voice-assistant.
 
-Calendar and scheduling applications
+### AI & MCP
 
-| Project | Description | Repository |
-|---------|-------------|------------|
-| [Orthoterm](orthoterm.md) | Orthodox calendar terminal application | [kcalvelli/orthoterm](https://github.com/kcalvelli/orthoterm) |
+- **[Sid Assistant](sid-assistant.md)** — local-first Home Assistant conversation agent for any OpenAI-compatible LLM.
+
+### Communication
+
+- **[Cairn Mail](cairn-mail.md)** — self-hosted email with AI-powered classification via local LLMs.
+- **[Cairn DAV](cairn-dav.md)** — declarative CalDAV/CardDAV sync with MCP integration.
+- **[Cairn Chat](cairn-chat.md)** — multi-user XMPP chat with an AI assistant.
+
+### Retro Computing
+
+- **[Ultimate64 MCP](Ultimate64MCP.md)** — MCP server for the Ultimate 64 series mainboards.
+- **[C64 Stream Viewer](c64-stream-viewer.md)** — Wayland-native viewer for Ultimate64 A/V streaming. Released v1.0.0.
+- **[C64 Terminal](c64term.md)** — terminal emulator with C64 aesthetic.
+
+### Orthodox & Personal
+
+- **[Orthoterm](orthoterm.md)** — Orthodox Christian liturgical calendar in the terminal.
+- **[Diner Placemat](dinerplacemat.md)** — Orthodox Christian business directory with a diner-placemat aesthetic.
+- **[Peregrinatio RPG](peregrinatio-rpg.md)** — a tabletop RPG project.
+
+### Meta
+
+- **[This Portal](kcalvelli-portal.md)** — auto-updating engineering portfolio with GitHub discovery, Structurizr diagrams, and AI-drafted prose.
+
+---
+
+## How this site is built
+
+Source of truth: [`projects.json`](https://github.com/kcalvelli/kcalvelli-portal/blob/main/projects.json) (catalog) and [`diagrams/cairn.dsl`](https://github.com/kcalvelli/kcalvelli-portal/blob/main/diagrams/cairn.dsl) (Structurizr workspace, rendered to C4-PlantUML SVGs). Published via MkDocs Material on GitHub Pages.
+
+Repository: [kcalvelli/kcalvelli-portal](https://github.com/kcalvelli/kcalvelli-portal)

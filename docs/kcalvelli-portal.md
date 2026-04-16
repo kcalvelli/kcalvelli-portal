@@ -1,71 +1,30 @@
-# Engineering Portal
+# This Portal
 
-Auto-updating portfolio site with GitHub discovery and architectural documentation.
+An auto-updating engineering portfolio with GitHub discovery, Structurizr diagrams, and CI-driven content.
 
-## Overview
+**Repository:** [kcalvelli/kcalvelli-portal](https://github.com/kcalvelli/kcalvelli-portal) · **Stack:** MkDocs Material + Structurizr DSL + GitHub Actions
 
-This repository contains the source for Keith Calvelli's engineering portfolio - a static documentation site built with MkDocs Material that showcases public GitHub projects with architectural diagrams, onboarding guides, and release information.
+## What it does
 
-**Repository:** [kcalvelli/kcalvelli-portal](https://github.com/kcalvelli/kcalvelli-portal)
+This is the site you're looking at. It exists so the operator doesn't have to hand-maintain a portfolio when new projects ship. The goals are boring and load-bearing:
+
+- **Discovery.** A scheduled GitHub Action queries `gh repo list kcalvelli`, diffs against `projects.json`, and opens a PR for new or archived repos.
+- **Diagrams that don't lie.** One Structurizr DSL file (`diagrams/cairn.dsl`) defines the model. Rendered to C4-PlantUML, exported to SVG in CI. No hand-authored diagrams to drift from reality.
+- **Content that doesn't rot.** Per-project pages are regenerated from cached READMEs, so the prose never gets more than a week stale.
 
 ## Architecture
 
-```mermaid
-C4Component
-    title Engineering Portal - Component Diagram
+Source of truth:
 
-    Container_Boundary(portal, "Engineering Portal") {
-        Component(projects, "projects.json", "JSON", "Project registry with tags and metadata")
-        Component(ops, "OPS_MANUAL.md", "Markdown", "Agent instructions for documentation generation")
-        Component(docs, "docs/", "Markdown", "Generated documentation pages")
-        Component(mkdocs, "mkdocs.yml", "YAML", "Site configuration and navigation")
-    }
+- `projects.json` — the project catalog with `featured`, `status`, `tags`, and `highlight` fields
+- `diagrams/cairn.dsl` — the Structurizr workspace (one model, six views)
+- `scripts/render-diagrams.sh` — DSL → C4-PlantUML → SVG, using `nixpkgs#structurizr-cli` and `nixpkgs#plantuml-c4`
 
-    System_Ext(github, "GitHub API", "Repository data source")
-    System_Ext(claude, "Claude Code", "AI assistant for updates")
-    Person(user, "Portfolio Viewer", "Visits the documentation site")
+CI:
 
-    Rel(claude, projects, "Reads/updates", "JSON")
-    Rel(claude, github, "Scrapes repos", "gh CLI")
-    Rel(claude, docs, "Generates", "Markdown + Mermaid")
-    Rel(ops, claude, "Instructs", "Agent workflow")
-    Rel(user, docs, "Views", "HTTPS")
+- On push, `mkdocs gh-deploy` builds and publishes
+- On schedule (planned), a discovery Action refreshes the catalog and opens a PR
 
-    UpdateElementStyle(portal, $bgColor="#1168bd")
-```
+## Why this exists
 
-**Key Components:**
-- **projects.json** - Master registry of all documented projects with display names, descriptions, tags, and diagram types
-- **OPS_MANUAL.md** - Detailed instructions for the documentation generation workflow
-- **OpenSpec** - Spec-driven development framework for managing changes
-
-## Onboarding
-
-### Prerequisites
-- Nix with flakes enabled
-- GitHub CLI (`gh`) authenticated
-
-### Build the Site
-
-```bash
-# Enter development environment
-nix develop
-
-# Serve locally
-mkdocs serve
-
-# Build static site
-mkdocs build
-```
-
-### Update the Portal
-
-When in Claude Code, simply say "update" to:
-1. Discover new public repositories from GitHub
-2. Auto-classify with tag suggestions
-3. Regenerate all documentation pages
-4. Update navigation
-
-## Release History
-
-No releases yet.
+Because a portfolio that goes stale during a job hunt is worse than no portfolio. Automation is the product.

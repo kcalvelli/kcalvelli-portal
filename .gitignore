@@ -1,0 +1,8 @@
+# mkdocs build output
+site/
+
+# Structurizr/PlantUML intermediates (rendered SVGs live in docs/diagrams/)
+diagrams/out/
+
+# Ephemeral GitHub API cache (fetched fresh by CI)
+.cache/
