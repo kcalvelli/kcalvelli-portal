@@ -1,88 +1,37 @@
 # Cairn Chat
 
-Family XMPP chat with AI assistant for the cairn ecosystem.
+A Prosody XMPP server packaged as a NixOS module, scoped to a Tailscale tailnet — never publicly exposed.
 
-## Overview
+**Repository:** [kcalvelli/cairn-chat](https://github.com/kcalvelli/cairn-chat) · **Language:** Nix (Prosody config) · **Transport:** XMPP over Tailscale
 
-A family-oriented XMPP chat system with an integrated AI assistant, designed for the cairn ecosystem. Like a private AIM, but only accessible within your Tailscale network, with an AI bot that can manage email, calendar, contacts, and more through MCP tools.
+## What it does
 
-**Repository:** [kcalvelli/cairn-chat](https://github.com/kcalvelli/cairn-chat)
+Cairn Chat runs a Prosody XMPP server bound exclusively to the tailnet: no public DNS, no public ports, no account system outside the tailnet's device identity. Multi-user chat via MUC (XEP-0045), file sharing via HTTP File Upload (XEP-0363), message archive with offline delivery via MAM.
 
-## Architecture
+Works with any XMPP client: Conversations on Android, Gajim, Dino on Linux, or an AI assistant connecting as a native XMPP client. The chat is also one of the channel adapters for [Cairn Companion](cairn-companion.md) — the agent can participate in the same MUCs as other users.
 
-```mermaid
-C4Component
-    title Cairn Chat - Component Diagram
+## Why XMPP
 
-    Container_Boundary(tailnet, "Tailscale Network") {
-        Component(clients, "XMPP Clients", "Conversations/Gajim/Dino", "Native chat applications")
-        Component(prosody, "Prosody Server", "XMPP Server", "Message routing and presence")
-        Component(bot, "cairn-ai-bot", "Python", "AI assistant with intent routing")
-    }
+Federation-capable, self-hostable, battle-tested, no accounts managed by a vendor. Combined with Tailscale, the auth story reduces to "is this device on the tailnet?" — no passwords to leak, no breach surface.
 
-    System_Ext(claude, "Claude API", "LLM for natural language")
-    System_Ext(gateway, "mcp-gateway", "Tool execution endpoint")
-
-    Rel(clients, prosody, "XMPP", "Messages")
-    Rel(prosody, bot, "XMPP", "@ai mentions")
-    Rel(bot, claude, "API calls", "HTTPS")
-    Rel(bot, gateway, "Tool execution", "HTTP/MCP")
-
-    UpdateElementStyle(bot, $bgColor="#1168bd")
-```
-
-**Key Features:**
-- **Private Family Messenger** - Accessible only within your Tailscale network
-- **AI Assistant** - Chat with `@ai` to manage email, calendar, contacts
-- **Native Clients** - Works with Conversations (Android), Gajim (Windows/Linux), Dino (Linux)
-- **Dynamic Tool Discovery** - New MCP servers added to mcp-gateway are automatically available
-- **Cost-Optimized** - Uses Haiku for intent classification, Sonnet for tool execution
-
-## Onboarding
-
-### Prerequisites
-- NixOS with flakes enabled
-- Tailscale configured
-- mcp-gateway running
-
-### Installation
-
-Add to your `flake.nix`:
+## Run it
 
 ```nix
-{
-  inputs.cairn-chat.url = "github:kcalvelli/cairn-chat";
+inputs.cairn-chat.url = "github:kcalvelli/cairn-chat";
 
-  outputs = { self, nixpkgs, cairn-chat, ... }: {
-    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
-      modules = [
-        cairn-chat.nixosModules.default
-        ./configuration.nix
-      ];
-    };
+# configuration.nix
+{
+  imports = [ cairn-chat.nixosModules.default ];
+
+  services.cairn-chat.prosody = {
+    enable = true;
+    domain = "chat.home.ts.net";
+    tailscaleServe.enable = true;
+    admins = [ "admin@chat.home.ts.net" ];
+
+    muc.enable = true;
+    httpFileShare.enable = true;
+    messageArchive.enable = true;
   };
 }
 ```
-
-### Configuration
-
-```nix
-services.cairn-chat = {
-  prosody = {
-    enable = true;
-    domain = "chat.home.ts.net";
-    tailscaleIP = "100.64.0.1";
-  };
-  bot = {
-    enable = true;
-    xmppDomain = "chat.home.ts.net";
-    xmppPasswordFile = config.age.secrets.ai-bot-password.path;
-    anthropicKeyFile = config.age.secrets.anthropic-key.path;
-    mcpGatewayUrl = "http://localhost:8085";
-  };
-};
-```
-
-## Release History
-
-No releases yet.

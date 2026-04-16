@@ -2,7 +2,7 @@
 
 I build opinionated, self-hosted infrastructure. A NixOS distribution that runs a multi-machine fleet. MCP servers that bridge AI into real systems. A customizable coding agent that runs as a daily driver, not a demo. Everything open source, everything declarative, everything in production — not a lab.
 
-Based in McAdenville, NC. Reachable on [GitHub](https://github.com/kcalvelli).
+Based in North Carolina. Reachable on [GitHub](https://github.com/kcalvelli).
 
 ---
 

@@ -1,105 +1,45 @@
 # Cairn DAV
 
-Declarative CalDAV/CardDAV sync for NixOS with MCP integration.
+Declarative CalDAV/CardDAV synchronization for NixOS with MCP integration — calendars, contacts, and AI read/write access in one module.
 
-## Overview
+**Repository:** [kcalvelli/cairn-dav](https://github.com/kcalvelli/cairn-dav) · **Language:** Python · **Backends:** vdirsyncer, khal, khard
 
-cairn-dav provides declarative CalDAV/CardDAV synchronization for NixOS, with first-class Google Calendar support and an MCP server for AI agents to read/create calendar events and search contacts.
+## What it does
 
-**Repository:** [kcalvelli/cairn-dav](https://github.com/kcalvelli/cairn-dav)
+Cairn DAV gives NixOS first-class, declarative calendar and contact sync. Everything's in Nix — no manual config files, no copy-paste OAuth dance. Providers supported:
 
-## Architecture
+- **Google Calendar & Contacts** — OAuth handled declaratively
+- **CalDAV/CardDAV** — any standard provider (Fastmail, Nextcloud, iCloud)
+- **HTTP/ICS subscriptions** — read-only feeds for holidays, sports, liturgical calendars
 
-```mermaid
-C4Component
-    title Cairn DAV - Component Diagram
+On top of the sync layer sits an **MCP server**: AI agents can read events, create new ones, and search contacts. That's the seam where [Cairn Mail](cairn-mail.md)'s "create reminder from this email" action tag actually fires.
 
-    Container_Boundary(dav, "cairn-dav") {
-        Component(nixmod, "NixOS Module", "Nix", "Declarative configuration")
-        Component(vdirsyncer, "vdirsyncer", "Python", "CalDAV/CardDAV sync engine")
-        Component(khal, "khal", "Python", "Calendar CLI")
-        Component(khard, "khard", "Python", "Contacts CLI")
-        Component(mcp, "MCP Server", "Python", "AI agent interface")
-    }
+Works standalone or as part of the Cairn ecosystem.
 
-    System_Ext(google, "Google Calendar/Contacts", "OAuth2 provider")
-    System_Ext(caldav, "CalDAV Servers", "Fastmail, Nextcloud, etc.")
-    System_Ext(ai, "AI Agents", "Claude Code, cairn-chat")
-
-    Rel(nixmod, vdirsyncer, "Generates config", "Nix")
-    Rel(vdirsyncer, google, "Syncs", "OAuth2/CalDAV")
-    Rel(vdirsyncer, caldav, "Syncs", "CalDAV/CardDAV")
-    Rel(khal, vdirsyncer, "Reads", "Local storage")
-    Rel(ai, mcp, "Tool calls", "MCP")
-    Rel(mcp, khal, "Queries", "CLI")
-
-    UpdateElementStyle(dav, $bgColor="#1168bd")
-```
-
-**Key Features:**
-- **Declarative Configuration** - No manual config files; everything in Nix
-- **Google Calendar & Contacts** - First-class OAuth support
-- **CalDAV/CardDAV** - Works with any standard provider (Fastmail, Nextcloud, etc.)
-- **HTTP/ICS Subscriptions** - Read-only calendar feeds (holidays, sports, etc.)
-- **MCP Server** - AI agents can read/create calendar events and search contacts
-
-## Onboarding
-
-### Installation
-
-Add to your `flake.nix`:
+## Run it
 
 ```nix
-{
-  inputs.cairn-dav.url = "github:kcalvelli/cairn-dav";
+inputs.cairn-dav.url = "github:kcalvelli/cairn-dav";
 
-  outputs = { self, nixpkgs, home-manager, cairn-dav, ... }: {
-    nixosConfigurations.myhost = nixpkgs.lib.nixosSystem {
-      modules = [
-        cairn-dav.nixosModules.default
-        home-manager.nixosModules.home-manager
-      ];
+# configuration.nix
+{
+  imports = [ inputs.cairn-dav.nixosModules.default ];
+
+  services.pim.calendar = {
+    enable = true;
+    defaultCalendar = "Family";
+    accounts.google = {
+      type = "google";
+      tokenFile = "/home/you/.vdirsyncer/google_token.json";
+      clientId = "your-client-id.apps.googleusercontent.com";
+      clientSecretFile = "/run/agenix/google-client-secret";
+    };
+    sync = {
+      frequency = "5m";
+      conflictResolution = "remote";
     };
   };
 }
 ```
 
-### Configuration
-
-```nix
-services.pim.calendar = {
-  enable = true;
-  defaultCalendar = "Family";
-
-  accounts = {
-    google = {
-      type = "google";
-      tokenFile = "/home/youruser/.vdirsyncer/google_token.json";
-      clientId = "your-client-id.apps.googleusercontent.com";
-      clientSecretFile = "/run/agenix/google-client-secret";
-    };
-  };
-
-  sync = {
-    frequency = "5m";
-    conflictResolution = "remote";
-  };
-};
-```
-
-### Initial Setup
-
-```bash
-# Discover and authorize calendars
-vdirsyncer discover
-
-# Initial sync
-vdirsyncer sync
-
-# Verify with khal
-khal list
-```
-
-## Release History
-
-No releases yet.
+The home-manager companion module reads the same `services.pim.*` config and generates the vdirsyncer / khal / khard configs on the user side.

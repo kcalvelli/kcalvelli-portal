@@ -1,152 +1,25 @@
 # Cairn Mail
 
-**AI-powered inbox organizer with local LLM classification for Cairn/NixOS**
+An AI-powered inbox organizer for NixOS. Self-hosted, declarative, with local LLM classification — no cloud AI dependencies.
 
-[View on GitHub](https://github.com/kcalvelli/cairn-mail)
+**Repository:** [kcalvelli/cairn-mail](https://github.com/kcalvelli/cairn-mail) · **Language:** Python · **AI runtime:** Ollama (local)
 
-## Overview
+## What it does
 
-Cairn Mail is a declarative email management system that combines direct provider integration (Gmail, IMAP) with local AI classification to automatically organize your inbox. Messages are tagged, prioritized, and organized—all locally, with zero cloud dependencies for AI processing.
+Cairn Mail combines direct provider integration (Gmail, IMAP) with local AI classification to automatically organize an inbox. Messages are tagged (`work`, `finance`, `personal`, `shopping`, or a user-defined taxonomy), prioritized, and filed — all on the machine running the service, with nothing leaving for cloud AI processing.
 
-**Key Features:**
+On top of classification it ships a modern split-pane web UI with threading, bulk operations, attachments, and full keyboard navigation. A mobile-optimized PWA mode with Material You icon theming on Android 13+ and touch gestures.
 
-* **AI-Powered Classification:** Automatically tags messages with categories like `work`, `finance`, `personal`, `shopping` using local LLMs via Ollama
-* **Multi-Account Support:** Manage Gmail (OAuth2) and IMAP accounts from a single interface
-* **Modern Web UI:** Responsive React interface with Material-UI, dark mode, and PWA support
-* **Mobile-Optimized:** Touch gestures, swipe actions, and responsive design for mobile devices
-* **Keyboard Navigation:** Full keyboard shortcut support (j/k navigation, quick actions)
-* **Real-Time Sync:** WebSocket-based live updates across all connected clients
-* **Bulk Operations:** Select multiple messages for batch actions with undo support
-* **Declarative Config:** Define everything in Nix—accounts, AI settings, custom tags
+## Action Tags
 
-**Note:** This application is designed for Cairn users and assumes Cairn conventions (agenix for secrets, `~/.config/nixos_config` for configuration).
+Tag a message with a special action and an MCP tool fires: **add contact** pulls the sender into the address book, **create reminder** turns mentioned dates into calendar events. Custom actions can invoke any MCP tool. Requires [Cairn DAV](cairn-dav.md) and [MCP Gateway](mcp-gateway.md) to be present.
 
-## Architecture
+## Run it
 
-The application follows a layered architecture with clear separation between the React frontend, FastAPI backend, email providers, and AI classification engine.
-
-```mermaid
-C4Component
-    title Component Diagram for Cairn Mail
-
-    UpdateLayoutConfig($c4ShapeInRow="3")
-
-    Person(user, "Cairn User", "Email user managing multiple accounts")
-
-    Container_Boundary(web_ui, "Web Interface") {
-        Component(reactApp, "React App", "TypeScript/Vite", "Material-UI components, React Query, Zustand state")
-        Component(pwa, "PWA Shell", "Service Worker", "Offline support, installable app")
-    }
-
-    Container_Boundary(backend, "FastAPI Backend") {
-        Component(api, "REST API", "Python/FastAPI", "Message CRUD, search, sync triggers")
-        Component(websocket, "WebSocket Manager", "FastAPI WebSockets", "Real-time sync notifications")
-        Component(syncEngine, "Sync Engine", "Python", "Orchestrates fetch, classify, store")
-    }
-
-    Container_Boundary(providers, "Email Providers") {
-        Component(gmailProvider, "Gmail Provider", "Google API Client", "OAuth2 auth, label sync")
-        Component(imapProvider, "IMAP Provider", "imaplib/smtplib", "Password auth, KEYWORD sync")
-    }
-
-    System_Ext(ollama, "Ollama", "Local LLM Runtime")
-    System_Ext(gmail, "Gmail API", "Google Cloud")
-    System_Ext(imapServer, "IMAP Server", "Fastmail, ProtonMail, etc.")
-    System_Ext(database, "SQLite", "Local Database")
-
-    Rel(user, reactApp, "Views/manages email", "Browser/PWA")
-    BiRel(reactApp, api, "REST requests", "HTTP/JSON")
-    BiRel(reactApp, websocket, "Live updates", "WebSocket")
-
-    Rel(api, syncEngine, "Triggers sync", "Internal call")
-    Rel(syncEngine, gmailProvider, "Fetches messages", "Gmail API")
-    Rel(syncEngine, imapProvider, "Fetches messages", "IMAP4")
-    Rel(syncEngine, ollama, "Classifies messages", "HTTP/JSON")
-    Rel(syncEngine, database, "Stores messages/tags", "SQLAlchemy")
-
-    Rel(gmailProvider, gmail, "OAuth2 requests", "HTTPS")
-    Rel(imapProvider, imapServer, "IMAP commands", "IMAP4/TLS")
-
-    Rel(websocket, reactApp, "Broadcasts updates", "JSON events")
-
-    UpdateElementStyle(syncEngine, $bgColor="#FF9800", $fontColor="#FFFFFF")
-    UpdateElementStyle(ollama, $bgColor="#4CAF50", $fontColor="#FFFFFF")
-    UpdateElementStyle(user, $bgColor="#2196F3", $fontColor="#FFFFFF")
-```
-
-**Architectural Assumptions:**
-
-* **Nix-Centric Design:** Configuration is declarative via Home Manager module, generating runtime config at build time
-* **Provider Abstraction:** BaseEmailProvider interface allows adding new providers (Outlook planned) without changing core logic
-* **Local-First AI:** All classification runs via Ollama on local hardware, no cloud API calls for AI
-* **SQLite Storage:** Messages and tags stored in local SQLite database with full-text search
-* **Real-Time Architecture:** WebSocket broadcasts sync events to all connected clients for instant updates
-* **Secret Management:** OAuth tokens and passwords managed via agenix/sops-nix, never stored in plaintext
-
-## Onboarding
-
-### Prerequisites
-
-1. **Cairn or NixOS with Home Manager** - Nix-native application
-2. **Ollama** - For local AI classification (`ollama pull llama3.2`)
-3. **Google Cloud OAuth credentials** (for Gmail accounts)
-
-### Installation
-
-Add to your flake inputs:
+Designed for Cairn users — the default config assumes Cairn conventions (agenix for secrets, `~/.config/nixos_config` for configuration). Non-Cairn NixOS users can adapt paths and secret management.
 
 ```nix
-{
-  inputs.cairn-mail.url = "github:kcalvelli/cairn-mail";
-}
+inputs.cairn-mail.url = "github:kcalvelli/cairn-mail";
 ```
 
-Enable in Home Manager:
-
-```nix
-{ config, ... }:
-{
-  imports = [ inputs.cairn-mail.homeManagerModules.default ];
-
-  programs.cairn-mail = {
-    enable = true;
-
-    ai = {
-      model = "llama3.2";
-      endpoint = "http://localhost:11434";
-    };
-
-    accounts.gmail = {
-      provider = "gmail";
-      email = "you@gmail.com";
-      oauthTokenFile = config.age.secrets.gmail-token.path;
-    };
-  };
-}
-```
-
-### Usage
-
-```bash
-# Sync messages from all accounts
-cairn-mail sync run
-
-# Start the web interface
-cairn-mail web
-# Open http://localhost:8080
-
-# Gmail OAuth setup wizard
-cairn-mail auth gmail --account personal
-```
-
-### Documentation
-
-* [Quick Start Guide](https://github.com/kcalvelli/cairn-mail/blob/main/docs/QUICKSTART.md) - Get running in 15 minutes
-* [User Guide](https://github.com/kcalvelli/cairn-mail/blob/main/docs/USER_GUIDE.md) - Complete feature documentation
-* [Configuration Reference](https://github.com/kcalvelli/cairn-mail/blob/main/docs/CONFIGURATION.md) - All Nix options
-
-## Release History
-
-| Version | Date | Status |
-| :--- | :--- | :--- |
-| - | - | No releases yet |
+See the repo's [Quick Start](https://github.com/kcalvelli/cairn-mail/blob/main/docs/QUICKSTART.md) for end-to-end setup.

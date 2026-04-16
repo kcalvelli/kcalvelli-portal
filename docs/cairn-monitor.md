@@ -1,161 +1,24 @@
 # Cairn Monitor
 
-**DMS plugin for monitoring and managing Cairn systems**
+A [DankMaterialShell](https://danklinux.com/) plugin for monitoring Cairn systems with integrated rebuild and update-tracking capabilities.
 
-[View on GitHub](https://github.com/kcalvelli/cairn-monitor)
+**Repository:** [kcalvelli/cairn-monitor](https://github.com/kcalvelli/cairn-monitor) · **Language:** QML · **Fork of:** [antonjah/nix-monitor](https://github.com/antonjah/nix-monitor)
 
-## Overview
+## What it does
 
-Cairn Monitor is a [DankMaterialShell](https://danklinux.com/) plugin exclusively designed for Cairn systems. It provides integrated rebuild and update tracking capabilities directly from the desktop shell. This is a fork of [nix-monitor](https://github.com/antonjah/nix-monitor) by Anton Andersson, with significant Cairn-specific modifications.
+Cairn Monitor is a desktop widget — a DMS plugin — that lives in the shell's bar and gives you operational visibility into a Cairn host without leaving the desktop:
 
-**Key Features:**
+- **Generation count** — total NixOS system generations
+- **Store size** — current Nix store disk usage with configurable warning threshold
+- **Update status** — checks Cairn's flake for available updates; icon turns green/yellow/red accordingly
+- **Detailed popout** — click the widget for a panel with summary cards, real-time command output console, and action buttons
 
-* **Dual Rebuild Buttons:** Separate "Rebuild Switch" (immediate activation) and "Rebuild Boot" (activate on next boot) actions
-* **Cairn Version Tracking:** Monitors Cairn library version from flake.lock instead of nixpkgs
-* **Zero Configuration:** Automatically configured when using Cairn desktop module
-* **Real-time Console:** View nixos-rebuild output as it runs
-* **Update Status:** Visual indicators (green/yellow/red) for Cairn update availability
-* **System Statistics:** Monitor NixOS generations count and Nix store size with configurable warnings
-* **Garbage Collection:** Trigger nix-collect-garbage directly from the UI
+The action buttons let you run `nixos-rebuild switch`, `nixos-rebuild boot`, or `nix-collect-garbage` directly from the desktop, without a terminal.
 
-**Note:** This plugin is exclusively designed for Cairn and will NOT work with standard NixOS installations.
+## Cairn-specific
 
-## Architecture
+This is a fork of [nix-monitor](https://github.com/antonjah/nix-monitor), heavily modified for Cairn. It expects Cairn as a flake input, uses Cairn's module structure, and tracks Cairn's library version instead of nixpkgs. **It won't work correctly on non-Cairn systems.** For general NixOS monitoring, use the upstream project. All credit for the original implementation to Anton Andersson.
 
-The plugin operates as a QML-based desktop widget that bridges user interactions with system-level Nix operations. It uses configurable shell commands to interface with NixOS, flake management, and GitHub APIs for version tracking.
+## Run it
 
-```mermaid
-C4Component
-    title Component Diagram for Cairn Monitor Plugin
-
-    UpdateLayoutConfig($c4ShapeInRow="3")
-
-    Person(user, "Cairn User", "Desktop user managing their system")
-
-    Container_Boundary(desktop_env, "Desktop Environment") {
-        Component(barWidget, "Bar Widget", "QML/QuickShell", "Shows generations, store size, update status")
-        Component(popoutPanel, "Popout Panel", "QML/QuickShell", "Detailed stats, console output, action buttons")
-        Component(settingsUI, "Settings Panel", "QML/QuickShell", "Configuration interface")
-    }
-
-    Container_Boundary(plugin_core, "Plugin Core") {
-        Component(commandRunner, "Command Runner", "JavaScript/QML Process", "Executes shell commands, streams stdout/stderr")
-        Component(configManager, "Config Manager", "JSON", "Loads commands from config.json")
-    }
-
-    System_Ext(dms, "DankMaterialShell", "GTK/QML Desktop Shell")
-    System_Ext(nixos, "NixOS System", "Linux OS")
-    System_Ext(flakeLock, "flake.lock", "JSON file")
-    System_Ext(github, "GitHub API", "HTTP/JSON")
-
-    Rel(user, barWidget, "Views system status", "Click")
-    Rel(user, popoutPanel, "Triggers rebuild/GC", "Button click")
-    Rel(user, settingsUI, "Configures intervals & thresholds", "DMS Settings")
-
-    BiRel(barWidget, popoutPanel, "Opens/closes panel", "UI events")
-    Rel(popoutPanel, commandRunner, "Executes rebuild/GC", "QML Process API")
-    Rel(commandRunner, configManager, "Loads command definitions", "JSON parse")
-
-    Rel(commandRunner, nixos, "Runs nixos-rebuild switch/boot", "sudo shell command")
-    Rel(commandRunner, nixos, "Runs nix-collect-garbage", "shell command")
-    Rel(commandRunner, flakeLock, "Parses local Cairn revision", "jq query")
-    Rel(commandRunner, github, "Fetches remote Cairn revision", "git ls-remote")
-
-    Rel(commandRunner, barWidget, "Updates stats every 5min", "Timer signal")
-    Rel(commandRunner, popoutPanel, "Streams command output", "stdout/stderr")
-
-    Rel(dms, barWidget, "Hosts widget", "Plugin system")
-
-    UpdateElementStyle(commandRunner, $bgColor="#FF9800", $fontColor="#FFFFFF")
-    UpdateElementStyle(user, $bgColor="#4CAF50", $fontColor="#FFFFFF")
-```
-
-**Architectural Assumptions:**
-
-* **QML Plugin Architecture:** Built as a QuickShell plugin loaded by DankMaterialShell at runtime via plugin.json manifest
-* **Command-based Integration:** All system interactions happen through configurable shell commands (defined in config.json) rather than direct Nix library calls
-* **Three-layer UI:** Bar widget for glanceable status, popout panel for detailed operations, and DMS settings integration for configuration
-* **Process-based Execution:** Uses QML Process component to spawn shell commands, capture stdout/stderr in real-time, and stream to console widget
-* **Flake-centric Design:** Assumes Cairn configuration is a flake with cairn as an input, reads flake.lock for local version, uses git ls-remote for remote version
-* **Auto-configuration:** Cairn desktop module automatically generates config.json with proper commands (`$FLAKE_PATH` detection, hostname interpolation)
-* **No Standalone Operation:** Requires DankMaterialShell plugin system and QuickShell runtime, cannot run independently
-
-## Onboarding
-
-### For Cairn Users (Automatic)
-
-If you're using Cairn with the desktop module enabled (`modules.desktop = true`), **this plugin is automatically configured** - no additional setup required!
-
-The plugin is included as part of the Cairn desktop module and will:
-
-* Auto-detect your flake location via `$FLAKE_PATH` or default to `~/.config/nixos_config`
-* Configure rebuild commands matching Cairn fish functions
-* Track Cairn library version for updates
-* Enable all features with sensible defaults
-
-Simply rebuild your system and the widget will appear in DMS.
-
-### Activation Steps
-
-1. Rebuild your Cairn configuration: `sudo nixos-rebuild switch`
-2. Restart DMS: `dms restart` (or log out and back in)
-3. Open DMS Settings → Plugins
-4. Click "Scan for Plugins"
-5. Toggle "Cairn Monitor" ON
-6. Add to your DankBar layout
-
-### Updating the Plugin
-
-The plugin updates automatically when you update your Cairn flake input:
-
-```bash
-# Update Cairn (includes cairn-monitor)
-nix flake update cairn
-
-# Rebuild
-sudo nixos-rebuild switch
-
-# Clear QML cache and restart DMS
-rm -rf ~/.cache/quickshell/qmlcache/
-dms restart
-```
-
-**Note:** Due to QML disk caching with Nix symlinks, you must clear the QML cache after plugin updates for changes to take effect.
-
-### Manual Configuration (Advanced)
-
-If you need custom configuration, you can override the defaults in your home-manager configuration:
-
-```nix
-{
-  programs.cairn-monitor = {
-    enable = true;
-
-    # Override rebuild commands if needed
-    rebuildCommand = [
-      "bash" "-c"
-      ''
-        FLAKE_PATH=''${FLAKE_PATH:-~/.config/nixos_config}
-        sudo nixos-rebuild switch --flake "$FLAKE_PATH#$(hostname)" 2>&1
-      ''
-    ];
-
-    rebuildBootCommand = [
-      "bash" "-c"
-      ''
-        FLAKE_PATH=''${FLAKE_PATH:-~/.config/nixos_config}
-        sudo nixos-rebuild boot --flake "$FLAKE_PATH#$(hostname)" 2>&1
-      ''
-    ];
-
-    # Customize update interval
-    updateInterval = 300; # 5 minutes
-  };
-}
-```
-
-## Release History
-
-| Version | Date | Status |
-| :--- | :--- | :--- |
-| - | - | No releases found |
+If you're using Cairn with the desktop module enabled (`modules.desktop = true`), this plugin is already installed and configured — no additional setup. Rebuild and the widget appears in DMS.

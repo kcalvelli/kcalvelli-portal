@@ -1,85 +1,49 @@
 # MCP Gateway
 
-Universal MCP Gateway - Aggregates MCP servers with REST, MCP HTTP transport, and OAuth2 authentication.
+Universal MCP Gateway — aggregates multiple Model Context Protocol servers behind a single HTTP interface.
 
-## Overview
+**Repository:** [kcalvelli/mcp-gateway](https://github.com/kcalvelli/mcp-gateway) · **Language:** Python (FastAPI)
 
-MCP Gateway aggregates multiple MCP (Model Context Protocol) servers behind a single interface, providing REST API access, native MCP HTTP transport support, and dynamic OpenAPI generation for tool integration.
+## What it does
 
-**Repository:** [kcalvelli/mcp-gateway](https://github.com/kcalvelli/mcp-gateway)
+MCP Gateway collapses the "one MCP server per capability" problem into a single aggregation layer. Multiple stdio-based MCP servers — git, filesystem, GitHub, time, search, email, calendar — sit behind the gateway; clients talk to one HTTP endpoint and get access to all of them.
+
+Three transports on one process:
+
+- **REST API** for traditional HTTP tool calls
+- **MCP HTTP Transport** — native MCP protocol over HTTP+SSE, 2025-06-18 spec
+- **Dynamic OpenAPI** — per-tool endpoints generated at runtime for Open WebUI integration
+
+A Web UI gives a visual orchestrator for managing servers and inspecting tools. Everything is declarative: NixOS and home-manager modules define which servers run, with what arguments, and what secrets they receive.
+
+## Security model
+
+No application-level authentication. Network security is provided by **Tailscale Services** — only devices on the tailnet can reach the gateway, and Tailscale provides device identity and end-to-end encryption. This is a deliberate choice: MCP is a high-trust protocol, and rebuilding auth at the application layer when the network already has it is noise.
 
 ## Architecture
 
-```mermaid
-C4Component
-    title MCP Gateway - Component Diagram
+See the [Gateway Components view](diagrams/gateway-components.svg) for the internal structure, and the [Cairn Containers view](diagrams/cairn-containers.svg) for how Gateway sits between clients (Companion, Open WebUI, Claude) and the proxied servers (Mail, DAV, Sentinel, Ultimate64 MCP, etc.).
 
-    Container_Boundary(gateway, "MCP Gateway") {
-        Component(rest, "REST API", "FastAPI", "Tool management and execution")
-        Component(mcp, "MCP Transport", "HTTP", "Native MCP protocol (2025-06-18)")
-        Component(openapi, "Dynamic OpenAPI", "JSON", "Per-tool endpoints for Open WebUI")
-        Component(ui, "Web UI", "HTML/JS", "Visual orchestrator")
-    }
-
-    System_Ext(servers, "MCP Servers", "git, github, filesystem, etc.")
-    System_Ext(clients, "AI Clients", "Claude Code, Open WebUI, etc.")
-    System_Ext(tailscale, "Tailscale", "Network security")
-
-    Rel(clients, rest, "HTTP", "Tool calls")
-    Rel(clients, mcp, "MCP HTTP", "Native protocol")
-    Rel(gateway, servers, "stdio", "Server communication")
-    Rel(tailscale, gateway, "Secures", "Network access")
-
-    UpdateElementStyle(gateway, $bgColor="#1168bd")
-```
-
-**Key Features:**
-- **REST API** - Tool management and execution via HTTP
-- **MCP HTTP Transport** - Native MCP protocol support (2025-06-18 spec)
-- **Dynamic OpenAPI** - Per-tool endpoints for Open WebUI integration
-- **Web UI** - Visual orchestrator for managing servers and tools
-- **Declarative Config** - NixOS/home-manager modules for server configuration
-- **Tailscale Integration** - Network-level security via Tailscale Services
-
-## Onboarding
-
-### Installation
-
-Add to your `flake.nix`:
+## Run it
 
 ```nix
+# flake.nix
+inputs.mcp-gateway.url = "github:kcalvelli/mcp-gateway";
+
+# home-manager
 {
-  inputs.mcp-gateway.url = "github:kcalvelli/mcp-gateway";
+  imports = [ mcp-gateway.homeManagerModules.default ];
 
-  outputs = { self, nixpkgs, mcp-gateway, ... }: {
-    nixpkgs.overlays = [ mcp-gateway.overlays.default ];
-
-    home-manager.users.youruser = {
-      imports = [ mcp-gateway.homeManagerModules.default ];
-
-      services.mcp-gateway = {
-        enable = true;
-        autoEnable = [ "git" "github" ];
-        servers = {
-          git = {
-            enable = true;
-            command = "${pkgs.mcp-server-git}/bin/mcp-server-git";
-          };
-        };
-      };
+  services.mcp-gateway = {
+    enable = true;
+    autoEnable = [ "github" "time" ];
+    servers.github = {
+      enable = true;
+      command = "${pkgs.github-mcp-server}/bin/github-mcp-server";
+      args = [ "stdio" ];
     };
   };
 }
 ```
 
-### API Endpoints
-
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/servers` | List all configured servers |
-| `GET /api/tools` | List all available tools |
-| `POST /api/tools/{server}/{tool}` | Execute a tool |
-
-## Release History
-
-No releases yet.
+Additional servers are one more `servers.<name> = { ... }` block each.

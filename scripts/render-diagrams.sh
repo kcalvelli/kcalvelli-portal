@@ -11,6 +11,7 @@ DSL="diagrams/cairn.dsl"
 TMP="diagrams/out"
 DEST="docs/diagrams"
 
+rm -rf "$TMP"
 mkdir -p "$TMP" "$DEST"
 
 echo ">>> Exporting DSL to C4-PlantUML..."
@@ -29,7 +30,7 @@ declare -A RENAMES=(
     [structurizr-CairnContainers.svg]=cairn-containers.svg
     [structurizr-GatewayComponents.svg]=gateway-components.svg
     [structurizr-CompanionComponents.svg]=companion-components.svg
-    [structurizr-ProductionDeployment.svg]=cairn-deployment.svg
+    [structurizr-ReferenceDeployment.svg]=cairn-deployment.svg
 )
 
 for src in "${!RENAMES[@]}"; do

@@ -106,20 +106,22 @@ workspace "Cairn" "Modular NixOS platform and AI infrastructure for a self-hoste
         sidAssistant -> hass "Conversation agent for"
 
         // === Deployment ===
-        deploymentEnvironment "Production" {
-            deploymentNode "edge (desktop)" "Primary workstation" "NixOS" {
+        // Representative topology — Cairn is designed for small fleets with
+        // a mix of interactive, always-on, and mobile hosts.
+        deploymentEnvironment "Reference" {
+            deploymentNode "Primary Workstation" "Desktop with interactive services" "NixOS" {
                 containerInstance nixCore
                 containerInstance companion
                 containerInstance gateway
                 containerInstance monitor
             }
-            deploymentNode "mini (server)" "Small form factor, always-on" "NixOS" {
+            deploymentNode "Always-On Server" "Headless host for stateful services" "NixOS" {
                 containerInstance mail
                 containerInstance dav
                 containerInstance chat
                 containerInstance sentinel
             }
-            deploymentNode "pangolin (laptop)" "Mobile workstation" "NixOS" {
+            deploymentNode "Mobile Host" "Laptop with core platform only" "NixOS" {
                 containerInstance nixCore
             }
             deploymentNode "Tailnet" "Mesh VPN connecting the fleet" "Tailscale" {
@@ -155,7 +157,7 @@ workspace "Cairn" "Modular NixOS platform and AI infrastructure for a self-hoste
             autolayout lr
         }
 
-        deployment cairn "Production" "ProductionDeployment" "Where each Cairn container runs on the fleet." {
+        deployment cairn "Reference" "ReferenceDeployment" "Representative deployment topology for a small Cairn fleet." {
             include *
             autolayout lr
         }
