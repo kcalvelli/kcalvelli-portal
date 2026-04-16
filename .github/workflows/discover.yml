@@ -44,19 +44,16 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
 
           git checkout -b "$BRANCH"
+          # Summary file is intentionally excluded — it's a runtime artifact,
+          # not part of the committed change set.
           git add -A
+          git reset -- discovery-summary.md 2>/dev/null || true
           git commit -m "Portfolio drift: scheduled discovery $(date -u +%Y-%m-%d)"
           git push -u origin "$BRANCH"
-
-          # Write the summary body to a tempfile so gh can read it without
-          # shell-quoting the multi-line string.
-          cat > /tmp/pr-body.md <<'BODY_EOF'
-          ${{ steps.discover.outputs.summary }}
-          BODY_EOF
 
           gh pr create \
             --base main \
             --head "$BRANCH" \
             --title "Portfolio drift detected ($(date -u +%Y-%m-%d))" \
-            --body-file /tmp/pr-body.md \
+            --body-file "${{ steps.discover.outputs.summary_file }}" \
             --label automated

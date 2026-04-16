@@ -227,14 +227,15 @@ summary+="---\n\n*Opened automatically by the discovery workflow. Review, adjust
 # Emit outputs for the workflow
 # ---------------------------------------------------------------------------
 
+# Write the summary to a file so the workflow can pass it to gh pr create
+# via --body-file, avoiding multi-line string escaping in $GITHUB_OUTPUT.
+SUMMARY_FILE="${GITHUB_WORKSPACE:-.}/discovery-summary.md"
+printf '%b' "$summary" > "$SUMMARY_FILE"
+
 if [ -n "${GITHUB_OUTPUT:-}" ]; then
     echo "drift=true" >> "$GITHUB_OUTPUT"
-    # Escape newlines for GitHub Actions output
-    {
-        echo "summary<<EOF_SUMMARY"
-        printf '%b' "$summary"
-        echo "EOF_SUMMARY"
-    } >> "$GITHUB_OUTPUT"
+    echo "summary_file=$SUMMARY_FILE" >> "$GITHUB_OUTPUT"
 fi
 
-echo ">>> Done. See diff for changes."
+echo ">>> Done. Summary written to $SUMMARY_FILE"
+echo ">>> See diff for changes."
