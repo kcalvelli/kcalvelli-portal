@@ -1,16 +1,30 @@
 name: publish
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - run: pip install mkdocs-material
-      - run: mkdocs gh-deploy --force
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Enable Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Render architecture diagrams
+        run: nix develop -c ./scripts/render-diagrams.sh
+
+      - name: Verify site builds (strict)
+        run: nix develop -c mkdocs build --strict
+
+      - name: Deploy to GitHub Pages
+        run: nix develop -c mkdocs gh-deploy --force

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Render Structurizr DSL → C4-PlantUML → SVG into docs/diagrams/.
-# Uses nixpkgs#structurizr-cli and nixpkgs#plantuml-c4 on demand.
+# Requires structurizr-cli and plantuml (with C4 bundled) on PATH.
+# Enter the devshell first: `nix develop`
 
 set -euo pipefail
 
@@ -13,15 +14,15 @@ DEST="docs/diagrams"
 mkdir -p "$TMP" "$DEST"
 
 echo ">>> Exporting DSL to C4-PlantUML..."
-nix run nixpkgs#structurizr-cli -- export \
+structurizr-cli export \
     -workspace "$DSL" \
     -format plantuml/c4plantuml \
     -output "$TMP"
 
 echo ">>> Rendering PUML to SVG..."
-(cd "$TMP" && nix run nixpkgs#plantuml-c4 -- -tsvg ./*.puml)
+(cd "$TMP" && plantuml -tsvg ./*.puml)
 
-echo ">>> Copying to docs/diagrams/ with clean names..."
+echo ">>> Copying to $DEST/ with clean names..."
 declare -A RENAMES=(
     [structurizr-Landscape.svg]=cairn-landscape.svg
     [structurizr-CairnContext.svg]=cairn-context.svg
@@ -34,7 +35,7 @@ declare -A RENAMES=(
 for src in "${!RENAMES[@]}"; do
     dst="${RENAMES[$src]}"
     cp "$TMP/$src" "$DEST/$dst"
-    echo "  $src → docs/diagrams/$dst"
+    echo "  $src → $DEST/$dst"
 done
 
 echo ">>> Done. $(ls "$DEST" | wc -l) diagrams in $DEST/"
