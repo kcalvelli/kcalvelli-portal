@@ -21,7 +21,7 @@ It ships **per-user home profiles** so the same system can host a power-user til
 
 ## Architecture
 
-Cairn's place in the broader ecosystem is shown in the [Cairn Containers view](/diagrams/cairn-containers.svg). It's the platform other Cairn-prefixed projects (Monitor, Mail, DAV, Chat, Companion, Gateway, Sentinel) extend via NixOS and home-manager modules.
+Cairn's place in the broader ecosystem is shown in the [Cairn Containers view](../../diagrams/cairn-containers.svg). It's the platform other Cairn-prefixed projects (Monitor, Mail, DAV, Chat, Companion, Gateway, Sentinel) extend via NixOS and home-manager modules.
 
 ## Run it
 

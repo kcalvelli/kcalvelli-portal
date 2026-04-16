@@ -31,7 +31,7 @@ No application-level authentication. Network security is provided by **Tailscale
 
 ## Architecture
 
-See the [Gateway Components view](/diagrams/gateway-components.svg) for internals, and the [Cairn Containers view](/diagrams/cairn-containers.svg) for how Gateway sits between clients (Companion, Open WebUI, Claude) and proxied servers (Mail, DAV, Sentinel, Ultimate64 MCP, etc.).
+See the [Gateway Components view](../../diagrams/gateway-components.svg) for internals, and the [Cairn Containers view](../../diagrams/cairn-containers.svg) for how Gateway sits between clients (Companion, Open WebUI, Claude) and proxied servers (Mail, DAV, Sentinel, Ultimate64 MCP, etc.).
 
 ## Run it
 

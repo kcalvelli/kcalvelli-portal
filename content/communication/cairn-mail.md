@@ -19,7 +19,7 @@ On top of classification it ships a modern split-pane web UI with threading, bul
 
 ## Action Tags
 
-Tag a message with a special action and an MCP tool fires: **add contact** pulls the sender into the address book, **create reminder** turns mentioned dates into calendar events. Custom actions can invoke any MCP tool. Requires [Cairn DAV](/communication/cairn-dav/) and [MCP Gateway](/ai/mcp-gateway/) to be present.
+Tag a message with a special action and an MCP tool fires: **add contact** pulls the sender into the address book, **create reminder** turns mentioned dates into calendar events. Custom actions can invoke any MCP tool. Requires [Cairn DAV](@/communication/cairn-dav.md) and [MCP Gateway](@/ai/mcp-gateway.md) to be present.
 
 ## Run it
 

@@ -27,7 +27,7 @@ It is explicitly **not** a new AI model, not a multi-tenant service, not a repla
 
 ## Architecture
 
-![Companion components](/diagrams/companion-components.svg)
+![Companion components](../../diagrams/companion-components.svg)
 
 ## Tiers
 

@@ -19,7 +19,7 @@ Cairn DAV gives NixOS first-class, declarative calendar and contact sync. Everyt
 - **CalDAV/CardDAV** — any standard provider (Fastmail, Nextcloud, iCloud)
 - **HTTP/ICS subscriptions** — read-only feeds for holidays, sports, liturgical calendars
 
-On top of the sync layer sits an **MCP server**: AI agents can read events, create new ones, and search contacts. That's the seam where [Cairn Mail](/communication/cairn-mail/)'s "create reminder from this email" action tag actually fires.
+On top of the sync layer sits an **MCP server**: AI agents can read events, create new ones, and search contacts. That's the seam where [Cairn Mail](@/communication/cairn-mail.md)'s "create reminder from this email" action tag actually fires.
 
 Works standalone or as part of the Cairn ecosystem.
 

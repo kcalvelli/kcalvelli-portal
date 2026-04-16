@@ -15,7 +15,7 @@ stack = "Nix · Prosody · XMPP · Tailscale"
 
 Cairn Chat runs a Prosody XMPP server bound exclusively to the tailnet: no public DNS, no public ports, no account system outside the tailnet's device identity. Multi-user chat via MUC (XEP-0045), file sharing via HTTP File Upload (XEP-0363), message archive with offline delivery via MAM.
 
-Works with any XMPP client: Conversations on Android, Gajim, Dino on Linux, or an AI assistant connecting as a native XMPP client. The chat is also one of the channel adapters for [Cairn Companion](/ai/cairn-companion/) — the agent can participate in the same MUCs as other users.
+Works with any XMPP client: Conversations on Android, Gajim, Dino on Linux, or an AI assistant connecting as a native XMPP client. The chat is also one of the channel adapters for [Cairn Companion](@/ai/cairn-companion.md) — the agent can participate in the same MUCs as other users.
 
 ## Why XMPP
 
